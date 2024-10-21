@@ -5,40 +5,88 @@ body {
   background-color: #f9f9f9;
 }
 
-header {
+/* styles.css */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
   background-color: #4CAF50; /* Header background color */
-  color: white; /* Text color */
-  padding: 10px 20px;
-  display: flex; /* Flexbox for layout */
-  justify-content: space-between; /* Space between title and button */
-  align-items: center; /* Center items vertically */
+  position: relative; /* Needed for absolute positioning of dropdown */
 }
 
 .header-title {
+  margin: 0;
   color: white;
-  font-size: 24px; /* Title font size */
-  margin: 0; /* Remove default margin */
 }
 
-.menu-button {
-  background-color: white; /* Menu button background */
-  color: #4CAF50; /* Button text color */
-  border: none; /* Remove border */
-  padding: 10px 15px; /* Button padding */
-  cursor: pointer; /* Pointer cursor */
+/* Hamburger menu styles */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 4px auto;
+  background-color: white; /* Color of the hamburger bars */
+  transition: all 0.3s;
+}
+
+/* Drop-down menu styles */
+.dropdown {
+  position: absolute; /* Position dropdown absolutely */
+  top: 60px; /* Adjust based on your header height */
+  right: 10px; /* Adjust the position */
+  background-color: white; /* Background color for the dropdown */
+  border: 1px solid #ccc; /* Border for the dropdown */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  z-index: 1; /* Ensure it appears above other elements */
+}
+
+.dropdown ul {
+  list-style-type: none; /* Remove default list styles */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown li {
+  padding: 10px 20px; /* Spacing for each option */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.2s; /* Transition for hover effect */
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+
+
+.menu button {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 15px; /* Padding around text */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  cursor: pointer; /* Pointer cursor on hover */
   border-radius: 5px; /* Rounded corners */
+}
+
+.menu button:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
 
 .menu {
-  background-color: white; /* Menu background color */
-  position: absolute; /* Position the menu below the button */
-  top: 70px; /* Adjust based on header height */
-  right: 20px; /* Position to the right */
-  border: 1px solid #ddd; /* Optional border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-  border-radius: 5px; /* Rounded corners */
-  z-index: 1; /* Ensure menu appears above other content */
-  display: block;
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
 .menu.open {
@@ -50,13 +98,12 @@ header {
 }
 
 .menu ul {
-  list-style-type: none; /* Remove bullet points */
-  padding: 10px; /* Padding inside the menu */
-  margin: 0; /* Remove default margin */
+  display: flex; /* Use flexbox to arrange items */
+  flex-direction: column; /* Stack items vertically */
 }
 
 .menu li {
-  margin: 0; /* Remove margin */
+  margin: 10 px; /* Add some space between the buttons */
 }
 
 .menu a {
@@ -122,8 +169,6 @@ button:hover {
   background-color: #45a049; /* Button hover color */
 }
 
-
-/* styles.css */
 .footer {
   background-color: #f8f8f8;
   padding: 20px;
@@ -140,6 +185,7 @@ button:hover {
 .footer nav ul li {
   display: inline;
   margin: 0 15px;
+  cursor: pointer;
 }
 
 .footer nav ul li a {
@@ -147,6 +193,7 @@ button:hover {
   color: #007bff;
 }
 
-.footer nav ul li a:hover {
+.footer nav ul li:hover {
   text-decoration: underline;
+  background-color: #f0f0f0ff;
 }

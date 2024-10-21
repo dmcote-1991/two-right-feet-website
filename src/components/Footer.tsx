@@ -1,18 +1,23 @@
 import React from 'react';
 import '../styles.css';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onShowPrograms: () => void;
+  onShowContact: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onShowPrograms, onShowContact}) => {
   return (
     <footer className="footer">
       <p>&copy; {new Date().getFullYear()} Two Right Feet. All rights reserved.</p>
       <nav>
         <ul>
-          <li><a href="#programs">Programs</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li onClick={onShowPrograms}>Programs</li>
+          <li onClick={onShowContact}>Contact Us</li>
         </ul>
       </nav>
     </footer>
   )
-}
+};
 
 export default Footer;

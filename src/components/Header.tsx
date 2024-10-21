@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
 import '../styles.css'; // Ensure this file exists and contains styles for your header
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    onShowPrograms: () => void;
+    onShowContact: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onShowPrograms, onShowContact }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const handleOptionClick = (option: string) => {
+        if (option === 'programs') {
+            onShowPrograms();
+        } else if (option === 'contact') {
+            onShowContact();
+        }
+        setIsMenuOpen(false); // Close the menu after selection
+    };
+
     return (
         <header className="header">
             <h1 className="header-title">Two Right Feet</h1>
-            <button className="menu-button" onClick={toggleMenu}>
-                {isMenuOpen ? 'Close Menu' : 'Menu'}
+            <button className="hamburger" onClick={toggleMenu}>
+                <div className="bar"></div>
+                <div className="bar"></div>
+                <div className="bar"></div>
             </button>
             {isMenuOpen && (
-                <nav className="menu">
+                <nav className="dropdown">
                     <ul>
-                        <li><a href="#programs">Programs</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
+                        <li onClick={() => handleOptionClick('programs')}>Programs</li>
+                        <li onClick={() => handleOptionClick('contact')}>Contact Us</li>
                     </ul>
                 </nav>
             )}
