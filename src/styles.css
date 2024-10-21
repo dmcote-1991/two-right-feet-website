@@ -121,3 +121,32 @@ button {
 button:hover {
   background-color: #45a049; /* Button hover color */
 }
+
+
+/* styles.css */
+.footer {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.footer nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.footer nav ul li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.footer nav ul li a:hover {
+  text-decoration: underline;
+}
