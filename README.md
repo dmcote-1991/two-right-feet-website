@@ -25,6 +25,7 @@ two-right-feet-website/
 │   ├── components/
 │   │   ├── Header.js
 │   │   ├── Footer.js
+│   │   ├── Home.js
 │   │   ├── ProgramList.js
 │   │   ├── ProgramCard.js
 │   │   └── ContactForm.js
@@ -39,6 +40,7 @@ two-right-feet-website/
 │   ├── components/
 │   │   ├── Header.tsx
 │   │   ├── Footer.tsx
+│   │   ├── Home.tsx
 │   │   ├── ProgramList.tsx
 │   │   ├── ProgramCard.tsx
 │   │   └── ContactForm.tsx

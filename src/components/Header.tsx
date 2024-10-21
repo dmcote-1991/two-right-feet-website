@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import '../styles.css'; // Ensure this file exists and contains styles for your header
 
 interface HeaderProps {
+    onShowHome: () => void;
     onShowPrograms: () => void;
     onShowContact: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowPrograms, onShowContact }) => {
+const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowContact }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -14,8 +15,10 @@ const Header: React.FC<HeaderProps> = ({ onShowPrograms, onShowContact }) => {
     };
 
     const handleOptionClick = (option: string) => {
-        if (option === 'programs') {
-            onShowPrograms();
+        if (option === 'home') {
+            onShowHome();
+        } else if (option === 'programs') {
+            onShowPrograms(); 
         } else if (option === 'contact') {
             onShowContact();
         }
@@ -33,6 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onShowPrograms, onShowContact }) => {
             {isMenuOpen && (
                 <nav className="dropdown">
                     <ul>
+                        <li onClick={() => handleOptionClick('home')}>Home</li>
                         <li onClick={() => handleOptionClick('programs')}>Programs</li>
                         <li onClick={() => handleOptionClick('contact')}>Contact Us</li>
                     </ul>
