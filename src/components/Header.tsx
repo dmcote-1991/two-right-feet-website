@@ -5,11 +5,12 @@ interface HeaderProps {
     onShowHome: () => void;
     onShowPrograms: () => void;
     onShowAbout: () => void;
+    onShowInsights: () => void;
     onShowContact: () => void;
     onShowPrivacyPolicy: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowContact, onShowPrivacyPolicy }) => {
+const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowInsights, onShowContact, onShowPrivacyPolicy }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -23,6 +24,8 @@ const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout
             onShowPrograms(); 
         } else if (option === 'about') {
             onShowAbout(); 
+        } else if (option === 'insights') {
+            onShowInsights();
         } else if (option === 'contact') {
             onShowContact();
         } else if (option === 'privacy-policy') {
@@ -45,6 +48,7 @@ const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout
                         <li onClick={() => handleOptionClick('home')}>Home</li>
                         <li onClick={() => handleOptionClick('programs')}>Programs</li>
                         <li onClick={() => handleOptionClick('about')}>About</li>
+                        <li onClick={() => handleOptionClick('insights')}>Insights</li>
                         <li onClick={() => handleOptionClick('contact')}>Contact</li>
                         <li onClick={() => handleOptionClick('privacy-policy')}>Privacy Policy</li>
                     </ul>

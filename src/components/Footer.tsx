@@ -5,11 +5,12 @@ interface FooterProps {
   onShowHome: () => void;
   onShowPrograms: () => void;
   onShowAbout: () => void;
+  onShowInsights: () => void;
   onShowContact: () => void;
   onShowPrivacyPolicy: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowContact, onShowPrivacyPolicy}) => {
+const Footer: React.FC<FooterProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowInsights, onShowContact, onShowPrivacyPolicy}) => {
   return (
     <footer className="footer">
       <p>&copy; {new Date().getFullYear()} Two Right Feet. All rights reserved.</p>
@@ -18,12 +19,13 @@ const Footer: React.FC<FooterProps> = ({ onShowHome, onShowPrograms, onShowAbout
           <li onClick={onShowHome}>Home</li>
           <li onClick={onShowPrograms}>Programs</li>
           <li onClick={onShowAbout}>About</li>
+          <li onClick={onShowInsights}>Insights</li>
           <li onClick={onShowContact}>Contact</li>
           <li onClick={onShowPrivacyPolicy}>Privacy Policy</li>
         </ul>
       </nav>
     </footer>
-  )
+  );
 };
 
 export default Footer;
