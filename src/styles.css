@@ -6,10 +6,69 @@ body {
 }
 
 header {
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Header background color */
+  color: white; /* Text color */
+  padding: 10px 20px;
+  display: flex; /* Flexbox for layout */
+  justify-content: space-between; /* Space between title and button */
+  align-items: center; /* Center items vertically */
+}
+
+.header-title {
   color: white;
-  padding: 20px;
-  text-align: center;
+  font-size: 24px; /* Title font size */
+  margin: 0; /* Remove default margin */
+}
+
+.menu-button {
+  background-color: white; /* Menu button background */
+  color: #4CAF50; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Button padding */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.menu {
+  background-color: white; /* Menu background color */
+  position: absolute; /* Position the menu below the button */
+  top: 70px; /* Adjust based on header height */
+  right: 20px; /* Position to the right */
+  border: 1px solid #ddd; /* Optional border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  border-radius: 5px; /* Rounded corners */
+  z-index: 1; /* Ensure menu appears above other content */
+  display: block;
+}
+
+.menu.open {
+  display: block; /* Show menu when open */
+}
+
+.menu.hidden {
+  display: none; /* Hide when the hidden class is applied */
+}
+
+.menu ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 10px; /* Padding inside the menu */
+  margin: 0; /* Remove default margin */
+}
+
+.menu li {
+  margin: 0; /* Remove margin */
+}
+
+.menu a {
+  display: block; /* Make links block-level */
+  padding: 10px; /* Add padding for links */
+  color: #4CAF50; /* Link text color */
+  text-decoration: none; /* Remove underline */
+}
+
+.menu a:hover {
+  background-color: #f0f0f0; /* Change background on hover */
+  text-decoration: underline; /* Underline on hover */
 }
 
 nav ul {
@@ -52,13 +111,13 @@ label {
 }
 
 button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
+  background-color: #4CAF50; /* Button background */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  padding: 10px; /* Button padding */
+  cursor: pointer; /* Pointer cursor */
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #45a049; /* Button hover color */
 }
