@@ -28,6 +28,7 @@ two-right-feet-website/
 │   │   ├── Home.js
 │   │   ├── ProgramList.js
 │   │   ├── ProgramCard.js
+│   │   ├── About.js
 │   │   └── ContactForm.js
 │   ├── App.js
 │   ├── bundle.js
@@ -43,6 +44,7 @@ two-right-feet-website/
 │   │   ├── Home.tsx
 │   │   ├── ProgramList.tsx
 │   │   ├── ProgramCard.tsx
+│   │   ├── About.tsx
 │   │   └── ContactForm.tsx
 │   ├── App.tsx
 │   ├── index.tsx
