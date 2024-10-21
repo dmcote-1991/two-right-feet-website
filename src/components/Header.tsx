@@ -6,9 +6,10 @@ interface HeaderProps {
     onShowPrograms: () => void;
     onShowAbout: () => void;
     onShowContact: () => void;
+    onShowPrivacyPolicy: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowContact }) => {
+const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowContact, onShowPrivacyPolicy }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -24,6 +25,8 @@ const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout
             onShowAbout(); 
         } else if (option === 'contact') {
             onShowContact();
+        } else if (option === 'privacy-policy') {
+            onShowPrivacyPolicy();
         }
         setIsMenuOpen(false); // Close the menu after selection
     };
@@ -43,6 +46,7 @@ const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout
                         <li onClick={() => handleOptionClick('programs')}>Programs</li>
                         <li onClick={() => handleOptionClick('about')}>About</li>
                         <li onClick={() => handleOptionClick('contact')}>Contact</li>
+                        <li onClick={() => handleOptionClick('privacy-policy')}>Privacy Policy</li>
                     </ul>
                 </nav>
             )}

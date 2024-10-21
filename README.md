@@ -19,42 +19,24 @@ Welcome to the **Two Right Feet** project! This website provides engaging librar
 
 ```bash
 two-right-feet-website/
-├── public/
+├── public/             
 │   └── index.html
-├── dist/  # Compiled JavaScript files
-│   ├── components/
-│   │   ├── Header.js
-│   │   ├── Footer.js
-│   │   ├── Home.js
-│   │   ├── ProgramList.js
-│   │   ├── ProgramCard.js
-│   │   ├── About.js
-│   │   └── ContactForm.js
-│   ├── App.js
-│   ├── bundle.js
-│   ├── 875.bundle.js
-│   ├── bundle.js.LICENSE.txt
-│   ├── index.js
-│   ├── index.html
-│   └── styles.css
-├── src/
-│   ├── components/
-│   │   ├── Header.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Home.tsx
-│   │   ├── ProgramList.tsx
-│   │   ├── ProgramCard.tsx
-│   │   ├── About.tsx
-│   │   └── ContactForm.tsx
-│   ├── App.tsx
-│   ├── index.tsx
-│   └── styles.css
-├── .gitignore
-├── package.json
-├── tsconfig.json
-├── webpack.config.js
-├── LICENSE.txt
-└── README.md
+├── dist/               # Compiled output files
+│   ├── components/     # JavaScript versions of components
+│   ├── bundle.js       
+│   ├── index.js        
+│   └── styles.css      
+├── src/                # Source code for the project
+│   ├── components/     # React components (Header, Footer, Home, etc.)
+│   ├── App.tsx         # Main application component
+│   ├── index.tsx       # Entry point for the app
+│   └── styles.css      # Main stylesheet
+├── .gitignore          
+├── package.json        
+├── tsconfig.json       # TypeScript configuration
+├── webpack.config.js   # Webpack configuration
+├── LICENSE.txt         
+└── README.md           
 ```
 
 ## License
