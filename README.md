@@ -24,6 +24,7 @@ two-right-feet-website/
 ├── dist/  # Compiled JavaScript files
 │   ├── components/
 │   │   ├── Header.js
+│   │   ├── Footer.js
 │   │   ├── ProgramList.js
 │   │   ├── ProgramCard.js
 │   │   └── ContactForm.js
@@ -37,6 +38,7 @@ two-right-feet-website/
 ├── src/
 │   ├── components/
 │   │   ├── Header.tsx
+│   │   ├── Footer.tsx
 │   │   ├── ProgramList.tsx
 │   │   ├── ProgramCard.tsx
 │   │   └── ContactForm.tsx
