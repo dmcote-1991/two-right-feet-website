@@ -10,7 +10,14 @@ interface HeaderProps {
     onShowPrivacyPolicy: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout, onShowInsights, onShowContact, onShowPrivacyPolicy }) => {
+const Header: React.FC<HeaderProps> = ({ 
+    onShowHome, 
+    onShowPrograms, 
+    onShowAbout, 
+    onShowInsights, 
+    onShowContact, 
+    onShowPrivacyPolicy 
+}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -37,6 +44,9 @@ const Header: React.FC<HeaderProps> = ({ onShowHome, onShowPrograms, onShowAbout
     return (
         <header className="header">
             <h1 className="header-title">Two Right Feet</h1>
+            <div className="contact-info">
+                <span>(914) 417-7182</span> | <span><a href="mailto:hannah@tworightfeetmusic.com">hannah@tworightfeetmusic.com</a></span>
+            </div>
             <button className="hamburger" onClick={toggleMenu}>
                 <div className="bar"></div>
                 <div className="bar"></div>
