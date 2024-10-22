@@ -7,10 +7,11 @@ import Insights from './components/Insights';
 import ContactForm from './components/ContactForm';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Footer from './components/Footer';
+import OptOut from './components/OptOut';
 import './styles.css';
 
 const App: React.FC = () => {
-    const [activeComponent, setActiveComponent] = useState<'home' | 'programs' | 'about' | 'insights' | 'contact' | 'privacy-policy' | null>('home');
+    const [activeComponent, setActiveComponent] = useState<'home' | 'programs' | 'about' | 'insights' | 'contact' | 'privacy-policy' | 'opt-out' | null>('home');
 
     const showHome = () => setActiveComponent('home');
     const showPrograms = () => setActiveComponent('programs');
@@ -18,6 +19,7 @@ const App: React.FC = () => {
     const showInsights = () => setActiveComponent('insights');
     const showContact = () => setActiveComponent('contact');
     const showPrivacyPolicy = () => setActiveComponent('privacy-policy');
+    const showOptOut = () => setActiveComponent('opt-out');
 
     return (
         <div className="app">
@@ -37,7 +39,8 @@ const App: React.FC = () => {
             {activeComponent === 'insights' && <Insights />}
             {activeComponent === 'contact' && <ContactForm />}
             {activeComponent === 'privacy-policy' && <PrivacyPolicy />}
-            <Footer onShowHome={showHome} onShowPrograms={showPrograms} onShowAbout={showAbout} onShowInsights={showInsights} onShowContact={showContact} onShowPrivacyPolicy={showPrivacyPolicy}/>
+            {activeComponent === 'opt-out' && <OptOut />}
+            <Footer onShowHome={showHome} onShowPrograms={showPrograms} onShowAbout={showAbout} onShowInsights={showInsights} onShowContact={showContact} onShowPrivacyPolicy={showPrivacyPolicy} onShowOptOut={showOptOut} />
         </div>
     );
 };

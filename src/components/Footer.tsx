@@ -8,6 +8,7 @@ interface FooterProps {
   onShowInsights: () => void;
   onShowContact: () => void;
   onShowPrivacyPolicy: () => void;
+  onShowOptOut: () => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ 
@@ -16,7 +17,8 @@ const Footer: React.FC<FooterProps> = ({
   onShowAbout, 
   onShowInsights, 
   onShowContact, 
-  onShowPrivacyPolicy
+  onShowPrivacyPolicy,
+  onShowOptOut
 }) => {
   return (
     <footer className="footer">
@@ -56,6 +58,7 @@ const Footer: React.FC<FooterProps> = ({
           <li onClick={onShowInsights}>Insights</li>
           <li onClick={onShowContact}>Contact</li>
           <li onClick={onShowPrivacyPolicy}>Privacy Policy</li>
+          <li onClick={onShowOptOut}>Opt-Out Preferences</li>
         </ul>
       </nav>
       <p>&copy; {new Date().getFullYear()} Two Right Feet. All rights reserved.</p>
