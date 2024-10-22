@@ -5,8 +5,6 @@ body {
   background-color: #f9f9f9;
 }
 
-/* styles.css */
-
 .header {
   display: flex;
   align-items: center;
@@ -181,6 +179,43 @@ button {
 
 button:hover {
   background-color: #45a049; /* Button hover color */
+}
+
+.home {
+  padding: 20px;
+}
+
+h2.testimonials-header {
+  cursor: pointer;
+  color: #4caf50;
+  transition: color 0.3s;
+}
+
+h2.testimonials-header:hover {
+  color: #388e3c;
+}
+
+.testimonials-dropdown {
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials-dropdown p {
+  margin-bottom: 30px;
+  padding: 10px;
+  border-left: 4px solid #4caf50;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.testimonials-dropdown h3 {
+  margin-top: 20px;
+  color: #333;
+  font-weight: bold;
 }
 
 .footer {
