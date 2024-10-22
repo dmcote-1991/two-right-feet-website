@@ -124,8 +124,11 @@ nav ul {
 }
 
 nav ul li {
+  cursor: pointer;
   display: inline;
   margin: 0 15px;
+  padding: 5px 0;
+  font-size: 0.8em;
 }
 
 h2 {
@@ -170,10 +173,30 @@ button:hover {
 }
 
 .footer {
-  background-color: #f8f8f8;
+  background-color: #4CAF50;
   padding: 20px;
   text-align: center;
   border-top: 1px solid #e0e0e0;
+  font-size: 0.6em;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer-content div {
+  margin: 10px;
+  flex: 1;
+  min-width: 220px;
+  max-width: 280px;
+}
+
+.footer-content h3 {
+  margin: 0 0 10px;
+  font-size: 1em;
 }
 
 .footer nav ul {
@@ -195,5 +218,4 @@ button:hover {
 
 .footer nav ul li:hover {
   text-decoration: underline;
-  background-color: #f0f0f0ff;
 }
