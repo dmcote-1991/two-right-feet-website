@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({
                 <div className="bar"></div>
             </button>
             {isMenuOpen && (
-                <nav className="dropdown">
+                <nav className="hamburger-dropdown">
                     <ul>
                         <li onClick={() => handleOptionClick('home')}>Home</li>
                         <li onClick={() => handleOptionClick('programs')}>Programs</li>

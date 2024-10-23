@@ -48,7 +48,7 @@ body {
 }
 
 /* Drop-down menu styles */
-.dropdown {
+.hamburger-dropdown {
   position: absolute; /* Position dropdown absolutely */
   top: 60px; /* Adjust based on your header height */
   right: 10px; /* Adjust the position */
@@ -58,7 +58,7 @@ body {
   z-index: 1; /* Ensure it appears above other elements */
 }
 
-.dropdown ul {
+.hamburger-dropdown ul {
   list-style-type: none; /* Remove default list styles */
   padding: 0;
   margin: 0;
@@ -144,6 +144,28 @@ h2 {
   color: #4CAF50;
 }
 
+.program-dropdown-header {
+  cursor: pointer;
+}
+
+.program-dropdown-header:hover {
+  color: #388e3c;
+  text-decoration: underline;
+}
+
+.dropdown-arrow {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  padding-left: 16px;
+}
+
 .program-list {
   display: flex;
   flex-wrap: wrap;
@@ -193,6 +215,7 @@ h2.testimonials-header {
 
 h2.testimonials-header:hover {
   color: #388e3c;
+  text-decoration: underline;
 }
 
 .testimonials-dropdown {

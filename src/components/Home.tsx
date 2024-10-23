@@ -13,7 +13,7 @@ const Home: React.FC = () => {
       <h2>Two Right Feet -- Arts. Literacy. School Readiness</h2>
       <h3>Enrichment Programs for Reading Readiness. Literacy. and Language Development</h3>
       <p>
-        Two Right Feet Arts creates highly interactive learning programs for children to explore 
+        Two Right Feet creates highly interactive learning programs for children to explore 
         reading, literacy and language through music, motion, and books.
       </p>
       <p>
