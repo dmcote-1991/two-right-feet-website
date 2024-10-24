@@ -19,7 +19,8 @@ Welcome to the **Two Right Feet** project! This website provides engaging librar
 
 ```bash
 two-right-feet-website/
-├── public/             
+├── public/   
+│   ├── images/           
 │   └── index.html
 ├── dist/               # Compiled output files
 │   ├── components/     # JavaScript versions of components
