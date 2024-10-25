@@ -1,8 +1,25 @@
+/* Custom CSS Properties */
+:root {
+  /* Colors */
+  --color-red: #cc002c;
+  --color-purple: #6b4687;
+  --color-purple-dark: #5e3d77;
+  --color-blush: #fff8fa;
+  --color-blush-dark: #f6e4e9;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: var(--color-blush);
+}
+
+h1, h2, h3 {
+  color: var(--color-red);
+  font-family: 'Baloo 2', cursive;
+  padding-left: 0;
+
 }
 
 .header {
@@ -10,16 +27,18 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #4CAF50; /* Header background color */
+  background-color: var(--color-purple); /* Header background color */
+  color: var(--color-blush);
   position: relative; /* Needed for absolute positioning of dropdown */
 }
 
 .header-title {
   margin: 0;
-  color: white;
+  color: var(--color-blush);
 }
 
 .contact-info {
+  color: var(--color-blush);
   font-size: 0.8em;
   text-align: center;
   margin-bottom: 10px;
@@ -27,7 +46,7 @@ body {
 
 .contact-info a {
   text-decoration: none;
-  color: inherit;
+  color: var(--color-blush);
 }
 
 /* Hamburger menu styles */
@@ -43,17 +62,17 @@ body {
   width: 25px;
   height: 3px;
   margin: 4px auto;
-  background-color: white; /* Color of the hamburger bars */
+  background-color: var(--color-blush); /* Color of the hamburger bars */
   transition: all 0.3s;
 }
 
 /* Drop-down menu styles */
 .hamburger-dropdown {
   position: absolute; /* Position dropdown absolutely */
-  top: 60px; /* Adjust based on your header height */
+  top: 68px; /* Adjust based on your header height */
   right: 10px; /* Adjust the position */
-  background-color: white; /* Background color for the dropdown */
-  border: 1px solid #ccc; /* Border for the dropdown */
+  background-color: var(--color-purple); /* Background color for the dropdown */
+  border: 1px solid var(--color-blush); /* Border for the dropdown */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
   z-index: 1; /* Ensure it appears above other elements */
 }
@@ -73,13 +92,12 @@ body {
 }
 
 .dropdown li:hover {
-  background-color: #f0f0f0; /* Highlight on hover */
+  background-color: var(--color-blush); /* Highlight on hover */
 }
 
-
 .menu button {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
+  background-color: var(--color-purple); /* Purple background */
+  color: var(--color-blush); /* White text */
   border: none; /* No border */
   padding: 10px 15px; /* Padding around text */
   text-align: center; /* Center the text */
@@ -89,7 +107,7 @@ body {
 }
 
 .menu button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: var(--color-purple-dark); /* Darker purple on hover */
 }
 
 .menu {
@@ -118,12 +136,12 @@ body {
 .menu a {
   display: block; /* Make links block-level */
   padding: 10px; /* Add padding for links */
-  color: #4CAF50; /* Link text color */
+  color: var(--color-purple); /* Link text color */
   text-decoration: none; /* Remove underline */
 }
 
 .menu a:hover {
-  background-color: #f0f0f0; /* Change background on hover */
+  background-color: var(--color-blush); /* Change background on hover */
   text-decoration: underline; /* Underline on hover */
 }
 
@@ -140,22 +158,18 @@ nav ul li {
   font-size: 0.8em;
 }
 
-h2 {
-  color: #4CAF50;
-}
-
 .program-dropdown-header {
   cursor: pointer;
 }
 
 .program-dropdown-header:hover {
-  color: #388e3c;
+  color: var(--color-purple);
   text-decoration: underline;
 }
 
 .dropdown-arrow {
   margin-left: 8px;
-  transition: transform 0.3s ease;
+  transition: transform .3s ease;
 }
 
 .dropdown-arrow.expanded {
@@ -174,10 +188,10 @@ h2 {
 }
 
 .program-card {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-purple);
   border-radius: 5px;
   padding: 15px;
-  background-color: white;
+  background-color: var(--color-blush-dark);
   flex: 1 1 200px;
 }
 
@@ -192,15 +206,15 @@ label {
 }
 
 button {
-  background-color: #4CAF50; /* Button background */
-  color: white; /* Button text color */
+  background-color: var(--color-purple); /* Button background */
+  color: var(--color-blush); /* Button text color */
   border: none; /* No border */
   padding: 10px; /* Button padding */
   cursor: pointer; /* Pointer cursor */
 }
 
 button:hover {
-  background-color: #45a049; /* Button hover color */
+  background-color: var(--color-purple-dark); /* Button hover color */
 }
 
 .home {
@@ -209,35 +223,34 @@ button:hover {
 
 h2.testimonials-header {
   cursor: pointer;
-  color: #4caf50;
-  transition: color 0.3s;
+  color: var(--color-red);
 }
 
 h2.testimonials-header:hover {
-  color: #388e3c;
+  color: #5d468c;
   text-decoration: underline;
 }
 
 .testimonials-dropdown {
   margin-top: 20px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-purple);
   border-radius: 8px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--color-blush-dark);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .testimonials-dropdown p {
   margin-bottom: 30px;
   padding: 10px;
-  border-left: 4px solid #4caf50;
-  background-color: #ffffff;
+  border-left: 4px solid var(--color-purple);
+  background-color: var(--color-blush);
   border-radius: 4px;
 }
 
 .testimonials-dropdown h3 {
   margin-top: 20px;
-  color: #333;
+  color: var(--color-red);
   font-weight: bold;
 }
 
@@ -260,8 +273,8 @@ h2.testimonials-header:hover {
 
 .article-link:hover {
   text-decoration: underline;
-  background-color: #f9f9f9;
-  color: #45a049
+  background-color: var(--color-blush);
+  color: var(--color-red)
 }
 
 .modal-overlay {
@@ -278,7 +291,7 @@ h2.testimonials-header:hover {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-blush);
   padding: 20px;
   border-radius: 8px;
   max-width: 600px;
@@ -294,7 +307,7 @@ h2.testimonials-header:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #4CAF50;
+  background: var(--color-purple);
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -303,7 +316,7 @@ h2.testimonials-header:hover {
 }
 
 .close-button:hover {
-  background-color: #45a049
+  background-color: var(--color-purple-dark)
 }
 
 body.modal-open {
@@ -312,18 +325,15 @@ body.modal-open {
 
 .opt-out {
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .opt-out h2 {
-  color: #333;
   margin-bottom: 10px;
 }
 
 .opt-out p {
-  color: #555;
   margin-bottom: 15px;
 }
 
@@ -335,19 +345,21 @@ body.modal-open {
 
 .confirmation-message {
   margin-top: 15px;
-  color: #4caf50;
+  color: var(--color-red);
   font-weight: bold;
 }
 
 .footer {
-  background-color: #4CAF50;
+  background-color: var(--color-purple);
+  color: var(--color-blush);
   padding: 20px;
   text-align: center;
-  border-top: 1px solid #e0e0e0;
-  font-size: 0.6em;
+  border-top: 1px solid var(--color-blush-dark);
+  font-size: 0.84em;
 }
 
 .footer-content {
+  color: var(--color-blush);
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -362,11 +374,18 @@ body.modal-open {
 }
 
 .footer-content h3 {
+  color: var(--color-blush-dark);
+  text-decoration: underline;
   margin: 0 0 10px;
   font-size: 1em;
 }
 
+.footer-content a {
+  color: var(--color-blush-dark)
+}
+
 .footer nav ul {
+  color: var(--color-blush);
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
@@ -380,7 +399,7 @@ body.modal-open {
 
 .footer nav ul li a {
   text-decoration: none;
-  color: #007bff;
+  color: var(--color-blush);
 }
 
 .footer nav ul li:hover {
