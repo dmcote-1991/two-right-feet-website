@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import Home from './components/Home';
-import Programs from './components/Programs';
-import ProgramList from './components/ProgramList';
-import About from './components/About';
-import Insights from './components/Insights';
-import ContactForm from './components/ContactForm';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import Footer from './components/Footer';
-import OptOut from './components/OptOut';
+import React, { lazy, useState } from 'react';
+const Header = lazy(() => import('./components/Header'));
+const Home = lazy(() => import('./components/Home'));
+const Programs = lazy(() => import('./components/Programs'));
+const ProgramList = lazy(() => import('./components/ProgramList'));
+const About = lazy(() => import('./components/About'));
+const Insights = lazy(() => import('./components/Insights'));
+const ContactForm = lazy(() => import('./components/ContactForm'));
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
+const Footer = lazy(() => import('./components/Footer'));
+const OptOut = lazy(() => import('./components/OptOut'));
 import './styles.css';
 
 const App: React.FC = () => {

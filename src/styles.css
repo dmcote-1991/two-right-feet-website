@@ -227,7 +227,7 @@ h2.testimonials-header {
 }
 
 h2.testimonials-header:hover {
-  color: #5d468c;
+  color: var(--color-purple);
   text-decoration: underline;
 }
 
@@ -404,4 +404,13 @@ body.modal-open {
 
 .footer nav ul li:hover {
   text-decoration: underline;
+}
+
+/* Image Styling */
+.home1 {
+  width: 100%;
+  max-width: 600px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
 }
