@@ -18,21 +18,29 @@ const ContactForm: React.FC = () => {
                 At Two Right Feet, we are happy hear from you Monday through Saturday to answer any 
                 questions you may have about us and our programs. We look forward to hearing from you!
             </p>
+            <div>
+                <img src={`${process.env.PUBLIC_URL}/images/trf-contact-1.jpg`} alt="Two Right Feet at Bristol Public Library" className="contact-1" />
+            </div>
+            <br />
             <form onSubmit={handleSubmit}>
                 <label>
-                    Name:
+                    Your Name:
+                    <br />
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
                 </label>
                 <label>
-                    Email:
+                    Your Email:
+                    <br />
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </label>
                 <label>
                     Subject:
+                    <br />
                     <input type="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
                 </label>
                 <label>
-                    Message:
+                    Your Message:
+                    <br />
                     <textarea value={message} onChange={(e) => setMessage(e.target.value)} required />
                 </label>
                 <button type="submit">Send Message</button>

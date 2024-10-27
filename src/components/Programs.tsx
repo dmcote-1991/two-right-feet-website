@@ -31,7 +31,10 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
         </h2>
         {dropdowns.literacy && (
           <div className="dropdown-content">
-            <p>Two Right Feet at Rockville Public Library {/* image */}</p>
+            <div>
+              <img src={`${process.env.PUBLIC_URL}/images/trf-programs-1.jpg`} alt="Hannah and a young boy are pointing to the book she is reading" className="programs-1" />
+            </div>
+            <label>Two Right Feet at Rockville Public Library</label>
             <p>Two Right Feet takes a multi-sensory approach to language and literacy. </p>
             <p>Each session features an age-appropriate book that is relevant to the selected educational theme. The 
               dramatized reading is read to live music, bringing the text to life. We find reading a book to rhythmic music 
@@ -76,7 +79,6 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
         )}
       </div>
 
-
       <div className="dropdown">
         <h2 onClick={() => toggleDropdown('arts')} className="program-dropdown-header">
           Arts {dropdowns.arts ? '▲' : '▼'} {/* Indicator for dropdown */}
@@ -86,6 +88,9 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
           <div className="dropdown-content">
           <p>Two Right Feet Arts uses the K-4 State Arts Standards in music and dance as a curriculum guide.</p>
           <h3>Music - Instruments</h3>
+          <div>
+            <img src={`${process.env.PUBLIC_URL}/images/trf-programs-2-istock.jpg`} alt="smiling children stading shoulder to shoulder playing various instruments" className="programs-2-3-istock" />
+          </div>
           <p>Auditory discrimination activities and games are used to identify the sounds of different percussion 
             instruments. Band games are another highlight; children learn to mimic short musical patterns, respond to cues 
             of conductor, and use active listening skills as they play in a band. With older groups, students take turns 
@@ -96,6 +101,9 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
             certain songs and “jump-rope-rhymes” (sing from memory). Live music is a regular feature of Two Right Feet 
             Music, led by Garrett Demmerle, our bassist, musician, and lyricist.</p>
           <h3>Dance</h3>
+          <div>
+            <img src={`${process.env.PUBLIC_URL}/images/trf-programs-3-istock.jpg`} alt="five smiling children stretching in a fitness room preparing to dance" className="programs-2-3-istock" />
+          </div>
           <p>Children demonstrate locomotor and non-locomotor movements for dance and creative movement activities. The 
             students are taught basic dance steps and are asked to contribute to the dance sequence (basic choreography). 
             Kids are given the opportunity to learn and demonstrate understanding of basic spatial concepts, accuracy in 
@@ -114,12 +122,19 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
 
         {dropdowns.settings && (
           <div className="dropdown-content">
+            <div>
+              <img src={`${process.env.PUBLIC_URL}/images/trf-home-2-programs-4.jpg`} alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
+            </div>
             <h3>Public and Private Schools: Grades PK - 3rd</h3>
             <li>Public Schools across CT and MA</li>
             <li>Montessori Method Schools</li>
             <li>Magnet, including many of Hartford’s Schools and CREC Schools</li>
             <li>Reggio Method Schools</li>
             <li>PTOs</li>
+            <div>
+              <img src={`${process.env.PUBLIC_URL}/images/trf-programs-5.jpg`} alt="Two Right Feet at Rockville Public Library" className="programs-5" />
+            </div>
+            <label>Two Right Feet at Rockville Public Library</label>
             <h3>After School Programs</h3>
             <li>Public and Private Schools (See above)</li>
             <h3>Public Libraries</h3>
@@ -148,6 +163,13 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
           Want to learn more about our program themes?{' '}
           <button onClick={onShowProgramList} className="link-button">Click here</button> to explore in detail.
         </p>
+      </div>
+      <div>
+        <img src={`${process.env.PUBLIC_URL}/images/trf-about-2-programs-6.jpg`} alt="Hannah performing a read-along with Garrett playing bass in the background" className="about-programs-photo-gallery" />
+        <img src={`${process.env.PUBLIC_URL}/images/trf-programs-7.jpg`} alt="Hannah teaching sign language during circle-time" className="about-programs-photo-gallery" />
+        <img src={`${process.env.PUBLIC_URL}/images/trf-programs-8.jpg`} alt="Hannah showing a class of children print-outs of instruments" className="about-programs-photo-gallery" />
+        <img src={`${process.env.PUBLIC_URL}/images/trf-about-4-programs-9.jpg`} alt="Hannah performing a read-along with Garrett playing bass behind her" className="about-programs-photo-gallery" />
+        <img src={`${process.env.PUBLIC_URL}/images/trf-programs-10.jpg`} alt="Garrett leading a call-and-response steady beat exercise" className="about-programs-photo-gallery" />
       </div>
     </section>
   );

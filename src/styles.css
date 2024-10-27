@@ -407,9 +407,90 @@ body.modal-open {
 }
 
 /* Image Styling */
-.home1 {
+.home-1 {
   width: 100%;
   max-width: 600px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.home-2-programs-4 {
+  width: 100%;
+  max-width: 600px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.header-footer-1 {
+  width: 100%;
+  width: auto; /* Maintain aspect ratio */
+  max-height: 80px;
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+  background-color: var(--color-blush);
+}
+
+.contact-1 {
+  width: 100%;
+  max-width: 600px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.about div {
+  display: flex;
+  justify-content: center; /* Centers the images horizontally */
+  flex-wrap: wrap; /* Allows wrapping if the screen is too narrow */
+  gap: 16px; /* Adds some spacing between images */
+}
+
+.programs div {
+  display: flex;
+  justify-content: center; /* Centers the images horizontally */
+  flex-wrap: wrap; /* Allows wrapping if the screen is too narrow */
+  gap: 16px; /* Adds some spacing between images */
+}
+
+.about-programs-photo-gallery {
+  width: 100%;
+  max-width: 200px;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the aspect ratio is maintained */
+  display: block; /* Centers the image */
+  margin: 0; /* Avoids centering each image individually */
+  border-radius: 8px; /* Rounds the corners */
+}
+
+.about-6 {
+  width: 100%;
+  max-width: 600px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.programs-1 {
+  width: 100%;
+  max-width: 200px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.programs-2-3-istock {
+  width: 100%;
+  max-width: 300px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.programs-5 {
+  width: 100%;
+  max-width: 400px;
   height: auto; /* Maintain aspect ratio */
   display: block; /* Centers the image */
   margin: 0 auto; /* Centers the image horizontally */

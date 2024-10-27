@@ -12,6 +12,9 @@ const Home: React.FC = () => {
     <section className="home">
       <h2>Two Right Feet -- Arts. Literacy. School Readiness</h2>
       <h3>Enrichment Programs for Reading Readiness. Literacy. and Language Development</h3>
+      <div>
+        <img src={`${process.env.PUBLIC_URL}/images/trf-home-1.png`} alt="Two Right Feet Banner" className="home-1" />
+      </div>
       <p>
         Two Right Feet creates highly interactive learning programs for children to explore 
         reading, literacy and language through music, motion, and books.
@@ -29,6 +32,10 @@ const Home: React.FC = () => {
       <p>
         Visit our Program Features page to learn how we educate, engage, and entertain.
       </p>
+      <div>
+        <img src={`${process.env.PUBLIC_URL}/images/trf-home-2-programs-4.jpg`} alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
+      </div>
+      <label>Two Right Feet at CREC Reggio Magnet School of the Arts</label>
       <h2 className="testimonials-header" onClick={toggleTestimonials} style={{ cursor: 'pointer' }}>
         Testimonials {isTestimonialsOpen ? '▲' : '▼'} {/* Indicator for dropdown */}
       </h2>
