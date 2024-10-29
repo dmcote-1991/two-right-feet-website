@@ -20,8 +20,7 @@ Welcome to the **Two Right Feet** project! This website provides engaging librar
 ```bash
 two-right-feet-website/
 ├── public/   
-│   ├── images/           
-│   └── index.html
+│   ├── images/ 
 ├── dist/               # Compiled output files
 │   ├── components/     # JavaScript versions of components
 │   ├── bundle.js       
@@ -32,12 +31,15 @@ two-right-feet-website/
 │   ├── App.tsx         # Main application component
 │   ├── index.tsx       # Entry point for the app
 │   └── styles.css      # Main stylesheet
-├── .gitignore          
+├── index.html          
 ├── package.json        
+├── eslint.config.js    # ESLint configuration
 ├── tsconfig.json       # TypeScript configuration
-├── webpack.config.js   # Webpack configuration
-├── LICENSE.txt         
-└── README.md           
+├── vite.config.mts     # Vite configuration
+├── vite-env.d.ts
+├── .gitignore          
+├── README.md           
+└── LICENSE.txt         
 ```
 
 ## License
