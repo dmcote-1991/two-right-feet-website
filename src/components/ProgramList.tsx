@@ -1,4 +1,3 @@
-import React from 'react';
 import ProgramCard from './ProgramCard';
 
 const ProgramList: React.FC = () => {

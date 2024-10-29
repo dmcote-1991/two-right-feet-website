@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ContactForm: React.FC = () => {
     const [name, setName] = useState('');
@@ -19,7 +19,7 @@ const ContactForm: React.FC = () => {
                 questions you may have about us and our programs. We look forward to hearing from you!
             </p>
             <div>
-                <img src={`${process.env.PUBLIC_URL}/images/trf-contact-1.jpg`} alt="Two Right Feet at Bristol Public Library" className="contact-1" />
+                <img src="/images/trf-contact-1.jpg" alt="Two Right Feet at Bristol Public Library" className="contact-1" />
             </div>
             <br />
             <form onSubmit={handleSubmit}>

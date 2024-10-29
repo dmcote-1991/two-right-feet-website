@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles.css'; // Ensure this file exists and contains styles for your header
 
 interface HeaderProps {
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
     return (
         <header className="header">
             <div>
-            <img src={`${process.env.PUBLIC_URL}/images/trf-header-footer-1.png`} alt="Two Right Feet Logo" className="header-footer-1" />
+                <img src="/images/trf-header-footer-1.png" alt="Two Right Feet Logo" className="header-footer-1" />
             </div>
             <h1 className="header-title">Two Right Feet</h1>
             <div className="contact-info">

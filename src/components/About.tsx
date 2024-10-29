@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles.css';
 
 const About: React.FC = () => {
@@ -6,11 +5,11 @@ const About: React.FC = () => {
     <section className="about">
       <h2>About Us</h2>
       <div>
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-1.jpg`} alt="Garrett and Hannah on a ferry in the 1990s" className="about-programs-photo-gallery" />
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-2-programs-6.jpg`} alt="Hannah performing a read-along with Garrett playing bass in the background" className="about-programs-photo-gallery" />
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-3.jpg`} alt="Hannah and a class of children dancing and playing air-guitar" className="about-programs-photo-gallery" />
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-4-programs-9.jpg`} alt="Hannah performing a read-along with Garrett playing bass behind her" className="about-programs-photo-gallery" />
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-5.jpg`} alt="Garrett, with his bass on his lap, intertacting with a child" className="about-programs-photo-gallery" />
+        <img src="/images/trf-about-1.jpg" alt="Garrett and Hannah on a ferry in the 1990s" className="about-programs-photo-gallery" />
+        <img src="/images/trf-about-2-programs-6.jpg" alt="Hannah performing a read-along with Garrett playing bass in the background" className="about-programs-photo-gallery" />
+        <img src="/images/trf-about-3.jpg" alt="Hannah and a class of children dancing and playing air-guitar" className="about-programs-photo-gallery" />
+        <img src="/images/trf-about-4-programs-9.jpg" alt="Hannah performing a read-along with Garrett playing bass behind her" className="about-programs-photo-gallery" />
+        <img src="/images/trf-about-5.jpg" alt="Garrett, with his bass on his lap, intertacting with a child" className="about-programs-photo-gallery" />
       </div>
       <h3>Our Story</h3>
       <p>
@@ -22,7 +21,7 @@ const About: React.FC = () => {
         With encouragement from teachers in the Head Start staff, Two Right Feet was born.
       </p>
       <div>
-        <img src={`${process.env.PUBLIC_URL}/images/trf-about-6.jpg`} alt="Hannah teaching sign language to a class of children with Garrett playing the bass" className="about-6" />
+        <img src="/images/trf-about-6.jpg" alt="Hannah teaching sign language to a class of children with Garrett playing the bass" className="about-6" />
       </div>
       <p>
       Since our start we’ve been joined by our daughter Hannah who shares her mom’s passion for 

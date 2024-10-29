@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles.css';
 
 interface FooterProps {
@@ -44,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({
         <div>
           <h3>More About Us</h3>
           <div>
-            <img src={`${process.env.PUBLIC_URL}/images/trf-header-footer-1.png`} alt="Two Right Feet Logo" className="header-footer-1" />
+            <img src="/images/trf-header-footer-1.png" alt="Two Right Feet Logo" className="header-footer-1" />
           </div>
           <p>
             Looking for more information about us? You can see one of our programs on the 

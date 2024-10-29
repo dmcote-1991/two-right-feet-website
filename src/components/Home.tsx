@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles.css';
 
 const Home: React.FC = () => {
@@ -13,7 +13,7 @@ const Home: React.FC = () => {
       <h2>Two Right Feet -- Arts. Literacy. School Readiness</h2>
       <h3>Enrichment Programs for Reading Readiness. Literacy. and Language Development</h3>
       <div>
-        <img src={`${process.env.PUBLIC_URL}/images/trf-home-1.png`} alt="Two Right Feet Banner" className="home-1" />
+        <img src="/images/trf-home-1.png" alt="Two Right Feet Banner" className="home-1" />
       </div>
       <p>
         Two Right Feet creates highly interactive learning programs for children to explore 
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
         Visit our Program Features page to learn how we educate, engage, and entertain.
       </p>
       <div>
-        <img src={`${process.env.PUBLIC_URL}/images/trf-home-2-programs-4.jpg`} alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
+        <img src="/images/trf-home-2-programs-4.jpg" alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
       </div>
       <label>Two Right Feet at CREC Reggio Magnet School of the Arts</label>
       <h2 className="testimonials-header" onClick={toggleTestimonials} style={{ cursor: 'pointer' }}>

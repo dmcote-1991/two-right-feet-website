@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import { lazy, useState } from 'react';
 const Header = lazy(() => import('./components/Header'));
 const Home = lazy(() => import('./components/Home'));
 const Programs = lazy(() => import('./components/Programs'));
