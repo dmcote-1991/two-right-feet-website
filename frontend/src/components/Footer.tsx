@@ -1,24 +1,7 @@
+import { Link } from 'react-router-dom';
 import '/src/styles.css';
 
-interface FooterProps {
-  onShowHome: () => void;
-  onShowPrograms: () => void;
-  onShowAbout: () => void;
-  onShowInsights: () => void;
-  onShowContact: () => void;
-  onShowPrivacyPolicy: () => void;
-  onShowOptOut: () => void;
-}
-
-const Footer: React.FC<FooterProps> = ({ 
-  onShowHome, 
-  onShowPrograms, 
-  onShowAbout, 
-  onShowInsights, 
-  onShowContact, 
-  onShowPrivacyPolicy,
-  onShowOptOut
-}) => {
+const Footer: React.FC = () => { 
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -54,13 +37,13 @@ const Footer: React.FC<FooterProps> = ({
       </div>
       <nav>
         <ul>
-          <li onClick={onShowHome}>Home</li>
-          <li onClick={onShowPrograms}>Programs</li>
-          <li onClick={onShowAbout}>About</li>
-          <li onClick={onShowInsights}>Insights</li>
-          <li onClick={onShowContact}>Contact</li>
-          <li onClick={onShowPrivacyPolicy}>Privacy Policy</li>
-          <li onClick={onShowOptOut}>Opt-Out Preferences</li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/programs">Programs</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/insights">Insights</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+          <li><Link to="/opt-out">Opt-Out Preferences</Link></li>
         </ul>
       </nav>
       <p>&copy; {new Date().getFullYear()} Two Right Feet. All rights reserved.</p>

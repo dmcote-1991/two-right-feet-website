@@ -1,11 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '/src/styles.css'; 
 
-interface ProgramsProps {
-  onShowProgramList: () => void;
-}
-
-const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
+const Programs: React.FC = () => {
   const [dropdowns, setDropdowns] = useState({
     literacy: false,
     readiness: false,
@@ -161,7 +158,7 @@ const Programs: React.FC<ProgramsProps> = ({ onShowProgramList }) => {
       <div className="program-link">
         <p>
           Want to learn more about our program themes?{' '}
-          <button onClick={onShowProgramList} className="link-button">Click here</button> to explore in detail.
+          <Link to="/program-list">Click Here</Link> to explore in detail.
         </p>
       </div>
       <div>

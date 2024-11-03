@@ -1,44 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '/src/styles.css'; 
 
-interface HeaderProps {
-    onShowHome: () => void;
-    onShowPrograms: () => void;
-    onShowAbout: () => void;
-    onShowInsights: () => void;
-    onShowContact: () => void;
-    onShowPrivacyPolicy: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ 
-    onShowHome, 
-    onShowPrograms, 
-    onShowAbout, 
-    onShowInsights, 
-    onShowContact, 
-    onShowPrivacyPolicy 
-}) => {
+const Header: React.FC = () => { 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-    };
-
-    const handleOptionClick = (option: string) => {
-        if (option === 'home') {
-            onShowHome();
-        } else if (option === 'programs') {
-            onShowPrograms(); 
-        } else if (option === 'about') {
-            onShowAbout(); 
-        } else if (option === 'insights') {
-            onShowInsights();
-        } else if (option === 'contact') {
-            onShowContact();
-        } else if (option === 'privacy-policy') {
-            onShowPrivacyPolicy();
-        }
-        setIsMenuOpen(false); // Close the menu after selection
     };
 
     return (
@@ -58,12 +26,12 @@ const Header: React.FC<HeaderProps> = ({
             {isMenuOpen && (
                 <nav className="hamburger-dropdown">
                     <ul>
-                        <li onClick={() => handleOptionClick('home')}>Home</li>
-                        <li onClick={() => handleOptionClick('programs')}>Programs</li>
-                        <li onClick={() => handleOptionClick('about')}>About</li>
-                        <li onClick={() => handleOptionClick('insights')}>Insights</li>
-                        <li onClick={() => handleOptionClick('contact')}>Contact</li>
-                        <li onClick={() => handleOptionClick('privacy-policy')}>Privacy Policy</li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/programs">Programs</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/insights">Insights</Link></li>
+                        <li><Link to="/contact">Contact</Link></li>
+                        <li><Link to="/privacy-policy">Privacy Policy</Link></li>
                     </ul>
                 </nav>
             )}

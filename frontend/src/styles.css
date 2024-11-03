@@ -217,6 +217,18 @@ button:hover {
   background-color: var(--color-purple-dark); /* Button hover color */
 }
 
+a {
+  background-color: var(--color-purple); /* Button background */
+  color: var(--color-blush); /* Button text color */
+  border: none; /* No border */
+  padding: 10px; /* Button padding */
+  cursor: pointer; /* Pointer cursor */
+}
+
+a:hover {
+  background-color: var(--color-purple-dark); /* Button hover color */
+}
+
 .home {
   padding: 20px;
 }
