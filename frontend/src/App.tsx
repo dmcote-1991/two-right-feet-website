@@ -9,7 +9,7 @@ const ContactForm = lazy(() => import('./components/ContactForm'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const Footer = lazy(() => import('./components/Footer'));
 const OptOut = lazy(() => import('./components/OptOut'));
-import './styles.css';
+import '/src/styles.css';
 
 const App: React.FC = () => {
     const [activeComponent, setActiveComponent] = useState<'home' | 'programs' | 'program-list' | 'about' | 'insights' | 'contact' | 'privacy-policy' | 'opt-out' | null>('home');

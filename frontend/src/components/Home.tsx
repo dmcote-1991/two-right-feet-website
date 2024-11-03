@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles.css';
+import '/src/styles.css';
 
 const Home: React.FC = () => {
   const [isTestimonialsOpen, setIsTestimonialsOpen] = useState(false);

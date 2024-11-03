@@ -1,0 +1,31 @@
+{
+  "name": "two-right-feet-website-frontend",
+  "version": "1.0.0",
+  "main": "index.tsx",
+  "type": "module",
+  "author": "David Cote",
+  "license": "UNLICENSED",
+  "description": "A responsive and user-friendly website for 'Two Right Feet', providing information about their library programs for children aged 3 to grade three. Developed as part of my freelance web development work, this project showcases modern web technologies including React, TypeScript, and Vite.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "ts-loader": "^9.5.1",
+    "vite": "^5.4.10"
+  }
+}

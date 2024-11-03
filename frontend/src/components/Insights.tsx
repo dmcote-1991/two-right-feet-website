@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../styles.css';
+import '/src/styles.css';
 
 interface Article {
   title: string;

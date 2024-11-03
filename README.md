@@ -19,27 +19,43 @@ Welcome to the **Two Right Feet** project! This website provides engaging librar
 
 ```bash
 two-right-feet-website/
-├── public/   
-│   ├── images/ 
-├── dist/               # Compiled output files
-│   ├── components/     # JavaScript versions of components
-│   ├── bundle.js       
-│   ├── index.js        
-│   └── styles.css      
-├── src/                # Source code for the project
-│   ├── components/     # React components (Header, Footer, Home, etc.)
-│   ├── App.tsx         # Main application component
-│   ├── index.tsx       # Entry point for the app
-│   └── styles.css      # Main stylesheet
-├── index.html          
-├── package.json        
-├── eslint.config.js    # ESLint configuration
-├── tsconfig.json       # TypeScript configuration
-├── vite.config.mts     # Vite configuration
-├── vite-env.d.ts
-├── .gitignore          
-├── README.md           
-└── LICENSE.txt         
+├── backend/
+│   ├── dist/                  # Compiled output files
+│   │   └── ...        
+│   ├── node_modules/
+│   │   └── ...                
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── src/                   # Source code
+│   │   ├── index.ts           # Entry point
+│   │   └── ...
+│   ├── .env
+│   ├── package.json
+│   └── tsconfig.json
+├── frontend/
+│   ├── dist/                  # Compiled output files
+│   │   └── ...
+│   ├── node_modules/
+│   │   └── ...
+│   ├── public/                # Static files
+│   │   └── images/
+│   │       └── ...
+│   ├── src/                   # Source code
+│   │   ├── components/
+│   │   ├── App.tsx            # Main application component
+│   │   ├── index.tsx          # Entry point
+│   │   └── styles.css
+│   ├── index.html             
+│   ├── .env
+│   ├── eslint.config.js
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── vite.env.d.ts
+│   └── vite.config.mts
+├── .gitignore
+├── LICENSE.txt
+└── README.md
+    
 ```
 
 ## License

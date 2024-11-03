@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles.css'; // Ensure this file exists and contains styles for your header
+import '/src/styles.css'; 
 
 interface HeaderProps {
     onShowHome: () => void;

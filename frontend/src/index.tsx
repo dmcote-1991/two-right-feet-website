@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 const App = React.lazy(() => import('./App'));
-import './styles.css'; // Importing the CSS file
+import '/src/styles.css'; // Importing the CSS file
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

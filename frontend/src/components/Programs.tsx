@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles.css'; // Make sure you have relevant styles defined
+import '/src/styles.css'; 
 
 interface ProgramsProps {
   onShowProgramList: () => void;
