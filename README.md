@@ -24,13 +24,17 @@ two-right-feet-website/
 │   │   └── ...        
 │   ├── node_modules/
 │   │   └── ...                
-│   ├── prisma/
-│   │   └── schema.prisma
 │   ├── src/                   # Source code
-│   │   ├── index.ts           # Entry point
-│   │   └── ...
+│   │   ├── server.ts          # Entry point
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   │   └── Program.ts
+│   │   └── routes/
+│   │       └── program.ts
 │   ├── .env
 │   ├── package.json
+│   ├── eslint.config.js
 │   └── tsconfig.json
 ├── frontend/
 │   ├── dist/                  # Compiled output files
