@@ -1,0 +1,27 @@
+import express, { Request, Response } from 'express';
+import Program from '../models/Program.js';
+
+const router = express.Router();
+
+// Create a new program
+router.post('/', async (req: Request, res: Response) => {
+  try {
+    const program = new Program(req.body);
+    await program.save();
+    res.status(201).json(program);
+  } catch (error) {
+    res.status(400).json({ message: error instanceof Error ? error.message : 'An error occurred' });
+  }
+});
+
+// Get all programs
+router.get('/', async (req: Request, res: Response) => {
+  try {
+    const programs = await Program.find();
+    res.json(programs);
+  } catch (error) {
+    res.status(500).json({ message: error instanceof Error ? error.message : 'An error occurred'});
+  }
+});
+
+export default router;
