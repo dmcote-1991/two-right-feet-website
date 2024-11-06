@@ -5,6 +5,7 @@ const ProgramList: React.FC = () => {
     const [programs, setPrograms] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
 
     useEffect(() => {
         const fetchPrograms = async () => {
@@ -34,6 +35,10 @@ const ProgramList: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const filteredPrograms = selectedCategory
+        ? programs.filter((program) => program.category === selectedCategory)
+        : programs;
+
     return (
         <section id="programs">
             <h2>Our Programs</h2>
@@ -43,8 +48,31 @@ const ProgramList: React.FC = () => {
                 Feet Program Curriculum. And, of course, all of our themes involve dancing, creative movement, a dramatic, 
                 interactive reading of a selected book, songs, signing, finger-plays, and other fun musical activities.</p>
 
+            {/* Filter Message */}
+            <p className="filter-message">
+                You can filter the programs by category using the dropdown below.
+            </p>
+            
+            {/* Category Filter Dropdown */}
+            <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+                <option value="">All Categories</option>
+                <option value="Arts & Music">Arts & Music</option>
+                <option value="Health & Well-Being">Health & Well-Being</option>
+                <option value="Imagination">Imagination</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Pigs">Pigs</option>
+                <option value="Reading Literacy">Reading Literacy</option>
+                <option value="Science & Nature">Science & Nature</option>
+                <option value="Seasonal">Seasonal</option>
+                <option value="Transportation">Transportation</option>
+            </select>
+
+            {/* Render filtered programs */}
             <div className="program-list">
-                {programs.map((program, index) => (
+                {filteredPrograms.map((program, index) => (
                     <ProgramCard key={index} {...program} />
                 ))}
             </div>

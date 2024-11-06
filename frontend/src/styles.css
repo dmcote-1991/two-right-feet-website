@@ -195,6 +195,12 @@ nav ul li {
   flex: 1 1 200px;
 }
 
+.filter-message {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .category {
   font-style: italic;
   text-decoration: underline;
