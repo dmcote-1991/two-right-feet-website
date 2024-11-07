@@ -1,10 +1,63 @@
 import express, { Request, Response } from 'express';
-import ImageModel from '../models/Image.js';
-import { GridFSBucket } from 'mongodb';
+import multer from 'multer';
 import mongoose from 'mongoose';
+import { GridFSBucket } from 'mongodb';
+import ImageModel from '../models/Image.js';
 
 const router = express.Router();
 
+// Set up multer storage to store file in memory (as a buffer)
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+// Route for uploading an image
+router.post('/upload', upload.single('image'), async (req: Request, res: Response): Promise<void> => {
+  if (!req.file) {
+    res.status(400).json({ error: 'No file uploaded' });
+    return;
+  }
+
+  const { originalname, mimetype, buffer } = req.file;
+
+  try {
+    const db = mongoose.connection.db;
+
+    // Check if db connection is available
+    if (!db) {
+      res.status(500).json({ error: 'Database connection not available' });
+      return;
+    }
+
+    const gfs = new GridFSBucket(db, { bucketName: 'images' });
+
+    // Upload the image to GridFS
+    const uploadStream = gfs.openUploadStream(originalname, {
+      contentType: mimetype,
+    });
+
+    uploadStream.end(buffer); // Write the buffer to GridFS
+
+    // Once the upload is done, save image metadata in the "image" collection
+    const image = new ImageModel({
+      filename: originalname,
+      contentType: mimetype,
+      fileId: uploadStream.id,
+    });
+
+    await image.save();
+
+    res.status(200).json({
+      message: 'Image uploaded successfully',
+      imageId: image._id,
+      filename: image.filename,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error uploading image', details: error });
+  }
+});
+
+// Route for getting an image by ID
 router.get('/image/:fileId', async (req: Request, res: Response): Promise<void> => {
   const fileId = req.params.fileId;
 
@@ -18,7 +71,7 @@ router.get('/image/:fileId', async (req: Request, res: Response): Promise<void> 
 
     // Check if db connection is available
     if (!db) {
-      res.status(500).json({ error: 'Database connecction is not available' });
+      res.status(500).json({ error: 'Database connection is not available' });
       return;
     }
 
