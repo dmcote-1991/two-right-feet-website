@@ -32,6 +32,7 @@ two-right-feet-website/
 │   │   │   ├── Image.ts
 │   │   │   └── Program.ts
 │   │   └── routes/
+│   │       ├── image.ts
 │   │       └── program.ts
 │   ├── .env
 │   ├── package.json
