@@ -29,6 +29,7 @@ two-right-feet-website/
 │   │   ├── config/
 │   │   ├── controllers/
 │   │   ├── models/
+│   │   │   ├── Image.ts
 │   │   │   └── Program.ts
 │   │   └── routes/
 │   │       └── program.ts
