@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
 import Program from '../models/Program.js';
 
-const router = express.Router();
+const programRouter = express.Router();
 
 // Create a new program
-router.post('/', async (req: Request, res: Response) => {
+programRouter.post('/', async (req: Request, res: Response) => {
   try {
     const { title, category, description } = req.body;
     const program = new Program({ title, category, description });
@@ -16,7 +16,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 // Get all programs
-router.get('/', async (req: Request, res: Response) => {
+programRouter.get('/', async (req: Request, res: Response) => {
   try {
     const programs = await Program.find();
     res.json(programs);
@@ -25,4 +25,4 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-export default router;
+export default programRouter;

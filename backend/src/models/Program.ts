@@ -6,6 +6,6 @@ const programSchema = new mongoose.Schema({
   description: { type: String, required: true }
 });
 
-const Program = mongoose.model('Program', programSchema);
+const ProgramModel = mongoose.model('Program', programSchema);
 
-export default Program;
+export default ProgramModel;

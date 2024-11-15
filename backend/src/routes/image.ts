@@ -1,106 +1,96 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
-import { GridFsStorage } from 'multer-gridfs-storage';
-import { GridFSBucket } from 'mongodb';
 import ImageModel from '../models/Image.js';
-import dotenv from 'dotenv';
+import { GridFSBucket } from 'mongodb';
 
-dotenv.config();
+const imageRouter = express.Router();
 
-const router = express.Router();
+// Get the bucket and upload instance from app locals
+const bucket = (req: Request): GridFSBucket => req.app.locals.bucket;
 
-// Use Express.Multer.File from express
-interface CustomFile extends Express.Multer.File {
-  id: string;  // Extend to include 'id'
-}
+// Test Upload:
+imageRouter.post('/test-upload', (req: Request, res: Response): void => {
+  const upload = req.app.locals.upload as multer.Multer;
 
-// Set up multer-gridfs-storage to store files directly in GridFS
-const storage = new GridFsStorage({
-  url: process.env.MONGODB_URI,
-  file: (req: Request, file: Express.Multer.File) => {
-    return {
-      bucketName: 'images', // Name of the GridFS bucket
-      filename: file.originalname,
-      contentType: file.mimetype
-    };
-  }
+  upload.single('image')(req, res, (err: any) => { // Call the middleware manually
+    if (err) {
+      res.status(400).json({ error: 'No file uploaded.' });
+      return;
+    }
+    res.status(200).json({ file: req.file });
+  });
 });
 
-const upload = multer({ storage });
 
 // Route for uploading an image
-router.post('/upload', upload.single('image'), async (req: Request, res: Response): Promise<void> => {
-  const file = req.file as CustomFile;  // Cast to CustomFile
+imageRouter.post('/upload', async (req: Request, res: Response): Promise<void> => {
+  const upload = req.app.locals.upload as multer.Multer;
 
-  if (!file) {
-    res.status(400).json({ error: 'No file uploaded' });
-    return;
-  }
+  upload.single("image")(req, res, async (err: any) => {
+    if (err) {
+      res.status(400).json({ error: 'No file uploaded.' });
+      return;
+    }
 
-  const { originalname, mimetype, id } = file;
+    const currentBucket = bucket(req);
 
-  try {
-    // Save the image metadata in the "images" collection in MongoDB
-    const image = new ImageModel({
-      filename: originalname,
-      contentType: mimetype,
-      fileId: id
-    });
+    if (!currentBucket) {
+      res.status(503).send('MongoDB is not connected. Try again later.');
+      return;
+    }
 
-    await image.save();
+    if (!req.file) {
+      console.error('No file uploaded');
+      res.status(400).json({ error: 'No file uploaded' });
+      return;
+    }
 
-    res.status(200).json({
-      message: 'Image uploaded successfully',
-      imageId: image._id,
-      filename: image.filename
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error uploading image', details: error });
-  }
+    const file = req.file as Express.Multer.File & { id?: mongoose.Types.ObjectId };
+
+    try {
+      // Save file metadata into MongoDB
+      const newImage = new ImageModel({
+        filename: file.originalname,
+        contentType: file.mimetype,
+        fileId: file.id, // GridFS file ID
+      });
+
+      await newImage.save();
+
+      res.status(201).json({
+        message: 'File uploaded successfully',
+        fileId: file.id,
+        filename: file.originalname
+      });
+    } catch (error) {
+      console.error('Error during file upload:', error);
+      res.status(500).json({ error: 'Failed to save file metadata' });
+    }
+  });
 });
 
 // Route for getting an image by ID
-router.get('/image/:fileId', async (req: Request, res: Response): Promise<void> => {
-  const fileId = req.params.fileId;
+imageRouter.get('/image/:id', async (req: Request, res: Response): Promise<void> => {
+  const currentBucket = bucket(req);
 
-  if (!fileId) {
-    res.status(400).json({ error: 'File ID is required' });
+  if (!currentBucket) {
+    res.status(503).send('MongoDB is not connected. Try again later.');
     return;
   }
 
   try {
-    const db = mongoose.connection.db;
-
-    // Check if db connection is available
-    if (!db) {
-      res.status(500).json({ error: 'Database connection is not available' });
-      return;
-    }
-
-    const gfs = new GridFSBucket(db, { bucketName: 'images' });
-
-    // Fetch the image metadata from the database
-    const image = await ImageModel.findOne({ fileId: new mongoose.Types.ObjectId(fileId) });
-
-    if (!image) {
-      res.status(404).json({ error: 'Image not found' });
-      return;
-    }
-
-    // Stream the image from GridFS and pipe it to the response
-    const downloadStream = gfs.openDownloadStream(image.fileId);
-
-    downloadStream.on('file', (file) => {
-      res.set('Content-Type', file.contentType);
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const fileStream = currentBucket.openDownloadStream(id);
+    fileStream.on('error', (error: Error) => {
+      console.error('Error retrieving file:', error);
+      res.status(404).send('File not found');
     });
-
-    downloadStream.pipe(res);
+    fileStream.pipe(res);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error fetching image', details: error });
+    console.error('Error during image retrieval:', error);
+    res.status(500).send('Error retrieving image');
   }
 });
 
-export default router;
+export default imageRouter;
