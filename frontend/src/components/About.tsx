@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '/src/styles.css';
 
 const About: React.FC = () => {
@@ -8,11 +8,16 @@ const About: React.FC = () => {
     { id: '673c0449428be6c6877e84c2', alt: 'Hannah and a class of children dancing and playing air-guitar' },
     { id: '673c0454428be6c6877e84c6', alt: 'Hannah performing a read-along with Garrett playing bass behind her' },
     { id: '673c0464428be6c6877e84ca', alt: 'Garrett, with his bass on his lap, interacting with a child' },
-    { id: '673c0472428be6c6877e84ce', alt: 'Hannah teaching sign language to a class of children with Garrett playing the bass' }
   ];
 
+  const mainAboutImageFileId = { id: '673c0472428be6c6877e84ce', alt: 'Hannah teaching sign language to a class of children with Garrett playing the bass' }
+
   const [images, setImages] = useState<{ src: string; alt: string }[]>([]);
-  const [trfAboutImage, setTrfAboutImage] = useState<string | null>('/images/trf-about-6.jpg');
+  const [mainAboutImage, setMainAboutImage] = useState<{ src: string; alt: string } | null>(null);
+
+  // Loading states
+  const [isImagesLoading, setIsImagesLoading] = useState(true);
+  const [isMainImageLoading, setIsMainImageLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -33,19 +38,33 @@ const About: React.FC = () => {
         setImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
       } catch (error) {
         console.error('Error fetching images:', error);
+      } finally {
+        setIsImagesLoading(false);
       }
     };
 
-    // Check if trf-about-6.jpg loads
-    const checkTrfAboutImage = () => {
-      const img = new Image();
-      img.src = '/images/trf-about-6.jpg';
-      img.onload = () => setTrfAboutImage('/images/trf-about-6.jpg');
-      img.onerror = () => setTrfAboutImage('/images/placeholder.jpg');
+    // Fetch main about image
+    const fetchMainAboutImage = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${mainAboutImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setMainAboutImage({ src: objectURL, alt: mainAboutImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch main about image`);
+          setMainAboutImage({ src: '/images/trf-home-2-programs-4.jpg', alt: 'Fallback image' });
+        }
+      } catch (error) {
+        console.error('Error fetching main about image:', error);
+        setMainAboutImage({ src: '/images/trf-home-2-programs-4.jpg', alt: 'Fallback image' });
+      } finally {
+        setIsMainImageLoading(false);
+      }
     };
 
     fetchImages();
-    checkTrfAboutImage();
+    fetchMainAboutImage();
   }, []);
 
   return (
@@ -53,14 +72,22 @@ const About: React.FC = () => {
       <h2>About Us</h2>
       
       <div>
-        {images.map((image, index) => (
-          <img 
-            key={index}
-            src={image.src}
-            alt={image.alt} 
-            className="about-programs-photo-gallery" 
-          />
-        ))}
+        {isImagesLoading ? (
+          <p>Loading images...</p> // Display a loading message while images are being fetched
+        ) : (
+          images.length > 0 ? (
+            images.map((image, index) => (
+              <img 
+                key={index}
+                src={image.src}
+                alt={image.alt} 
+                className="about-programs-photo-gallery" 
+              />
+            ))
+          ) : (
+            <p>No images available.</p> // Fallback message if images could not be fetched
+          )
+        )}
       </div>
 
       <h3>Our Story</h3>
@@ -70,12 +97,18 @@ const About: React.FC = () => {
       </p>
       
       <div>
-        {trfAboutImage && (
-          <img 
-            src={trfAboutImage} 
-            alt="Hannah teaching sign language to a class of children with Garrett playing the bass" 
-            className="about-6" 
-          />
+        {isMainImageLoading ? (
+          <p>Loading main image...</p>
+        ) : (
+          mainAboutImage ? (
+            <img 
+              src={mainAboutImage.src} 
+              alt={mainAboutImage.alt} 
+              className="about-6" 
+            />
+          ) : (
+            <p>Main image is unavailable.</p>
+          )
         )}
       </div>
 
