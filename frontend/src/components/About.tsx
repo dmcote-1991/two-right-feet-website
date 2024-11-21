@@ -53,11 +53,11 @@ const About: React.FC = () => {
           setMainAboutImage({ src: objectURL, alt: mainAboutImageFileId.alt });
         } else {
           console.error(`Failed to fetch main about image`);
-          setMainAboutImage({ src: '/images/trf-home-2-programs-4.jpg', alt: 'Fallback image' });
+          setMainAboutImage({ src: '/images/trf-home-1.png', alt: 'Fallback image' });
         }
       } catch (error) {
         console.error('Error fetching main about image:', error);
-        setMainAboutImage({ src: '/images/trf-home-2-programs-4.jpg', alt: 'Fallback image' });
+        setMainAboutImage({ src: '/images/trf-home-1.png', alt: 'Fallback image' });
       } finally {
         setIsMainImageLoading(false);
       }

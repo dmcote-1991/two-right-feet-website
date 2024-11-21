@@ -1,20 +1,108 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '/src/styles.css';
 
 const Home: React.FC = () => {
   const [isTestimonialsOpen, setIsTestimonialsOpen] = useState(false);
 
+  // State for the banner image
+  const [bannerImage, setBannerImage] = useState<{ src: string; alt: string; className: string } | null>(null);
+  const [isBannerImageLoading, setIsBannerImageLoading] = useState(true);
+
+  // State for the Reggio image
+  const [reggioImage, setReggioImage] = useState<{ src: string; alt: string; className: string } | null>(null);
+  const [isReggioImageLoading, setIsReggioImageLoading] = useState(true);
+
+  // State for testimonial drop-down
   const toggleTestimonials = () => {
     setIsTestimonialsOpen(!isTestimonialsOpen);
   };
+
+  useEffect(() => {
+    const fetchBannerImage = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/images/image/673c04fe428be6c6877e84db');
+          if (response.ok) {
+            const blob = await response.blob();
+            const objectURL = URL.createObjectURL(blob);
+            setBannerImage({
+              src: objectURL,
+              alt: 'Two Right Feet banner',
+              className: 'home-1'
+            });
+          } else {
+            console.error(`Failed to fetch banner image`);
+            setBannerImage({
+              src: '/images/trf-home-1.png',
+              alt: 'Fallback banner image',
+              className: 'home-1'
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching banner image:', error);
+          setBannerImage({
+            src: '/images/trf-home-1.png',
+            alt: 'Fallback banner image',
+            className: 'home-1'
+          });
+        } finally {
+          setIsBannerImageLoading(false);
+        }
+    };
+
+    const fetchReggioImage = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/images/image/673c0511428be6c6877e84df');
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setReggioImage({
+            src: objectURL,
+            alt: 'Two Right Feet at Reggio Magnet School',
+            className: 'home-2-programs-4',
+          });
+        } else {
+          console.error('Failed to fetch reggio image');
+          setReggioImage({
+            src: '/images/trf-home-1.png',
+            alt: 'Fallback image',
+            className: 'home-1',
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching Reggio image:', error);
+        setReggioImage({
+          src: '/images/trf-home-1.png',
+          alt: 'Fallback image',
+          className: 'home-1',
+        });
+      } finally {
+        setIsReggioImageLoading(false);
+      }
+    };
+
+    fetchBannerImage();
+    fetchReggioImage();
+  }, []);
 
   return (
     <section className="home">
       <h2>Two Right Feet -- Arts. Literacy. School Readiness</h2>
       <h3>Enrichment Programs for Reading Readiness. Literacy. and Language Development</h3>
+
       <div>
-        <img src="/images/trf-home-1.png" alt="Two Right Feet Banner" className="home-1" />
+        {isBannerImageLoading ? (
+          <p>Loading banner image...</p> // Show loading message while fetching
+        ) : bannerImage ? (
+          <img 
+            src={bannerImage.src}
+            alt={bannerImage.alt}
+            className={bannerImage.className}
+          />
+        ) : (
+          <p>Banner image is unavailable.</p> // Fallback message
+        )}
       </div>
+
       <p>
         Two Right Feet creates highly interactive learning programs for children to explore 
         reading, literacy and language through music, motion, and books.
@@ -22,7 +110,7 @@ const Home: React.FC = () => {
       <p>
         Our program was developed in 2000 by a speech and language pathologist who also held a 
         degree in dance. Hannah Demmerle, our program director and session leader, holds a degree 
-        in occupational therapy (COTA) and develops our educational programs and curriculum. Live 
+        in occupational therapy (COTA) and develops o educational programs and curriculum. Live 
         music and ASL (American Sign Language) are a few of the other highlights of Two Right 
         Feet’s enrichment programs.
       </p>
@@ -32,9 +120,21 @@ const Home: React.FC = () => {
       <p>
         Visit our Program Features page to learn how we educate, engage, and entertain.
       </p>
+
       <div>
-        <img src="/images/trf-home-2-programs-4.jpg" alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
+        {isReggioImageLoading ? (
+          <p>Loading image...</p>
+        ) : reggioImage ? (
+          <img
+            src={reggioImage.src}
+            alt={reggioImage.alt}
+            className={reggioImage.className}
+          />
+        ) : (
+          <p>Reggio image is unavailable.</p>
+        )}
       </div>
+
       <label>Two Right Feet at CREC Reggio Magnet School of the Arts</label>
       <h2 className="testimonials-header" onClick={toggleTestimonials} style={{ cursor: 'pointer' }}>
         Testimonials {isTestimonialsOpen ? '▲' : '▼'} {/* Indicator for dropdown */}

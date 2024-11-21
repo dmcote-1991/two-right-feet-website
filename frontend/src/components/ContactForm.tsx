@@ -20,11 +20,11 @@ const ContactForm: React.FC = () => {
                     setContactImage(objectURL);
                 } else {
                     console.error('Failed to fetch the contact image');
-                    setContactImage('/images/trf-home-2-programs-4.jpg');
+                    setContactImage('/images/trf-home-1.png');
                 }
             } catch (error) {
                 console.error('Error fetching contact image:', error);
-                setContactImage('/images/trf-home-2-programs-4.jpg');
+                setContactImage('/images/trf-home-1.png');
             } finally {
                 setIsContactImageLoading(false);
             }
