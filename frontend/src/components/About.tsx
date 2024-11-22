@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import useImageFetch from '../hooks/useImageFetch';
+import { fetchMultipleImages } from '../utils/fetchImages';
 import '/src/styles.css';
 
 const About: React.FC = () => {
@@ -10,61 +12,35 @@ const About: React.FC = () => {
     { id: '673c0464428be6c6877e84ca', alt: 'Garrett, with his bass on his lap, interacting with a child' },
   ];
 
-  const mainAboutImageFileId = { id: '673c0472428be6c6877e84ce', alt: 'Hannah teaching sign language to a class of children with Garrett playing the bass' }
+  const mainAboutImageFileId = { 
+    id: '673c0472428be6c6877e84ce', 
+    alt: 'Hannah teaching sign language to a class of children with Garrett playing the bass' 
+  };
 
   const [galleryImages, setGalleryImages] = useState<{ src: string; alt: string }[]>([]);
-  const [mainAboutImage, setMainAboutImage] = useState<{ src: string; alt: string } | null>(null);
-
-  // Loading states
   const [isGalleryImagesLoading, setIsGalleryImagesLoading] = useState(true);
-  const [isMainImageLoading, setIsMainImageLoading] = useState(true);
 
+  // Use custom hook for the main image
+  const { image: mainAboutImage, isLoading: isMainImageLoading } = useImageFetch(mainAboutImageFileId.id, {
+    fallbackSrc: '/images/trf-home-1.png',
+    alt: mainAboutImageFileId.alt,
+  });
+  
+  // Fetch gallery images using fetchMultipleImages utility
   useEffect(() => {
     const fetchGalleryImages = async () => {
+      setIsGalleryImagesLoading(true);
       try {
-        const fetchedImages = await Promise.all(
-          galleryImageFileIds.map(async ({ id, alt }) => {
-            const response = await fetch(`http://localhost:5000/api/images/image/${id}`);
-            if (response.ok) {
-              const blob = await response.blob();
-              const objectURL = URL.createObjectURL(blob);
-              return { src: objectURL, alt };
-            } else {
-              console.error(`Failed to fetch image with ID: ${id}`);
-              return null;
-            }
-          })
-        );
-        setGalleryImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
+        const images = await fetchMultipleImages(galleryImageFileIds);
+        setGalleryImages(images);
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error('Error fetching gallery images:', error);
       } finally {
         setIsGalleryImagesLoading(false);
       }
     };
 
-    // Fetch main about image
-    const fetchMainAboutImage = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${mainAboutImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setMainAboutImage({ src: objectURL, alt: mainAboutImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch main about image`);
-          setMainAboutImage({ src: '/images/trf-home-1.png', alt: 'Fallback image' });
-        }
-      } catch (error) {
-        console.error('Error fetching main about image:', error);
-        setMainAboutImage({ src: '/images/trf-home-1.png', alt: 'Fallback image' });
-      } finally {
-        setIsMainImageLoading(false);
-      }
-    };
-
     fetchGalleryImages();
-    fetchMainAboutImage();
   }, []);
 
   return (
@@ -104,16 +80,14 @@ const About: React.FC = () => {
       <div>
         {isMainImageLoading ? (
           <p>Loading main image...</p>
+        ) : mainAboutImage ? (
+          <img 
+            src={mainAboutImage.src} 
+            alt={mainAboutImage.alt} 
+            className="about-6" 
+          />
         ) : (
-          mainAboutImage ? (
-            <img 
-              src={mainAboutImage.src} 
-              alt={mainAboutImage.alt} 
-              className="about-6" 
-            />
-          ) : (
-            <p>Main image is unavailable.</p>
-          )
+          <p>Main image is unavailable.</p>
         )}
       </div>
 

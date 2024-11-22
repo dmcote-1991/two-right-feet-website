@@ -7,32 +7,37 @@ interface Image {
   alt: string;
 }
 
-const useImageFetch = (imageId: string, fallbackSrc = '/images/trf-home-1.png', fallbackAlt = 'Fallback image') => {
-  const [image, setImage] = useState<Image | null>(null);
+interface ImageFetchOptions {
+  fallbackSrc: string;
+  alt: string;
+}
+
+const useImageFetch = (id: string, options: ImageFetchOptions) => {
+  const [image, setImage] = useState<{ src: string; alt: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${imageId}`);
+        const response = await fetch(`http://localhost:5000/api/images/image/${id}`);
         if (response.ok) {
           const blob = await response.blob();
           const objectURL = URL.createObjectURL(blob);
-          setImage({ src: objectURL, alt: fallbackAlt });
+          setImage({ src: objectURL, alt: options.alt });
         } else {
-          console.error(`Failed to fetch image with ID: ${imageId}`);
-          setImage({ src: fallbackSrc, alt: fallbackAlt });
+          console.error(`Failed to fetch image with ID: ${id}`);
+          setImage({ src: options.fallbackSrc, alt: options.alt });
         }
       } catch (error) {
-        console.error(`Error fetching image with ID: ${imageId}`, error);
-        setImage({ src: fallbackSrc, alt: fallbackAlt });
+        console.error(`Error fetching image with ID: ${id}`, error);
+        setImage({ src: options.fallbackSrc, alt: options.alt });
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchImage();
-  }, [imageId, fallbackSrc, fallbackAlt]);
+  }, [id, options]);
 
   return { image, isLoading };
 };
