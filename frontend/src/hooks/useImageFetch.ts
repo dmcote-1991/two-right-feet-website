@@ -1,3 +1,5 @@
+// Custom hook for fetching individual images
+
 import { useState, useEffect } from 'react';
 
 interface Image {
