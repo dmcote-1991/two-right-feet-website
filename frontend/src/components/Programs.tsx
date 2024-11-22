@@ -3,24 +3,138 @@ import { Link } from 'react-router-dom';
 import '/src/styles.css'; 
 
 const Programs: React.FC = () => {
-  const imageFileIds = [
+  // Individual images
+  const programs1ImageFileId = { id: '673c0520428be6c6877e84e3', alt: 'Hannah and a young boy are pointing to the book she is reading' };
+  const programs2ImageFileId = { id: '673c0527428be6c6877e84e7', alt: 'smiling children stading shoulder to shoulder playing various instruments' };
+  const programs3ImageFileId = { id: '673c052e428be6c6877e84ed', alt: 'five smiling children stretching in a fitness room preparing to dance' };
+  const home2ImageFileId = { id: '673c0511428be6c6877e84df', alt: 'Two Right Feet at Reggio Magnet School' };
+  const programs5ImageFileId = { id: '673c0536428be6c6877e84f3', alt: 'Two Right Feet at Rockville Public Library' };
+
+  // Gallery images
+  const galleryImageFileIds = [
     { id: '673c0432428be6c6877e84be', alt: 'Hannah performing a read-along with Garrett playing bass in the background' },
     { id: '673c053e428be6c6877e84f7', alt: 'Hannah teaching sign language during circle-time' },
     { id: '673c0545428be6c6877e84fb', alt: 'Hannah showing a class of children print-outs of instruments' },
     { id: '673c0454428be6c6877e84c6', alt: 'Hannah performing a read-along with Garrett playing bass behind her' },
     { id: '673c054d428be6c6877e84ff', alt: 'Garrett leading a call-and-response steady beat exercise' },
   ];
+  
+  // Individual images state
+  const [programs1Image, setPrograms1Image] = useState<{ src: string; alt: string } | null>(null);
+  const [programs2Image, setPrograms2Image] = useState<{ src: string; alt: string } | null>(null);
+  const [programs3Image, setPrograms3Image] = useState<{ src: string; alt: string } | null>(null);
+  const [home2Image, setHome2Image] = useState<{ src: string; alt: string } | null>(null);
+  const [programs5Image, setPrograms5Image] = useState<{ src: string; alt: string } | null>(null);
+  
+  // Gallery images state
+  const [galleryImages, setGalleryImages] = useState<{ src: string; alt: string }[]>([]);
+  
+  // Individual images loading states
+  const [isPrograms1ImageLoading, setIsPrograms1ImageLoading] = useState(true);
+  const [isPrograms2ImageLoading, setIsPrograms2ImageLoading] = useState(true);
+  const [isPrograms3ImageLoading, setIsPrograms3ImageLoading] = useState(true);
+  const [isHome2ImageLoading, setIsHome2ImageLoading] = useState(true);
+  const [isPrograms5ImageLoading, setIsPrograms5ImageLoading] = useState(true);
 
-  const [images, setImages] = useState<{ src: string; alt: string }[]>([]);
-
-  // Images loading state
-  const [isImagesLoading, setIsImagesLoading] = useState(true);
+  // Gallery images loading states
+  const [isGalleryImagesLoading, setIsGalleryImagesLoading] = useState(true);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    // Fetch programs-1 image
+    const fetchPrograms1Image = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${programs1ImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setPrograms1Image({ src: objectURL, alt: programs1ImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch programs-1 image`);
+        }
+      } catch (error) {
+        console.error('Error fetching programs-1 image:', error);
+      } finally {
+        setIsPrograms1ImageLoading(false);
+      }
+    };
+
+    // Fetch programs-2 image
+    const fetchPrograms2Image = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${programs2ImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setPrograms2Image({ src: objectURL, alt: programs2ImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch programs-2 image`);
+        }
+      } catch (error) {
+        console.error('Error fetching programs-2 image:', error);
+      } finally {
+        setIsPrograms2ImageLoading(false);
+      }
+    };
+
+    // Fetch programs-3 image
+    const fetchPrograms3Image = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${programs3ImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setPrograms3Image({ src: objectURL, alt: programs3ImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch programs-3 image`);
+        }
+      } catch (error) {
+        console.error('Error fetching programs-3 image:', error);
+      } finally {
+        setIsPrograms3ImageLoading(false);
+      }
+    };
+
+    // Fetch home-2 image
+    const fetchHome2Image = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${home2ImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setHome2Image({ src: objectURL, alt: home2ImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch home-2 image`);
+        }
+      } catch (error) {
+        console.error('Error fetching home-2 image:', error);
+      } finally {
+        setIsHome2ImageLoading(false);
+      }
+    };
+
+    // Fetch programs-5 image
+    const fetchPrograms5Image = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/images/image/${programs5ImageFileId.id}`);
+        if (response.ok) {
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setPrograms5Image({ src: objectURL, alt: programs5ImageFileId.alt });
+        } else {
+          console.error(`Failed to fetch programs-5 image`);
+        }
+      } catch (error) {
+        console.error('Error fetching programs-5 image:', error);
+      } finally {
+        setIsPrograms5ImageLoading(false);
+      }
+    };
+
+    // Fetch gallery images
+    const fetchGalleryImages = async () => {
       try {
         const fetchedImages = await Promise.all(
-          imageFileIds.map(async ({ id, alt }) => {
+          galleryImageFileIds.map(async ({ id, alt }) => {
             const response = await fetch(`http://localhost:5000/api/images/image/${id}`);
             if (response.ok) {
               const blob = await response.blob();
@@ -32,15 +146,23 @@ const Programs: React.FC = () => {
             }
           })
         );
-        setImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
+        setGalleryImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
       } catch (error) {
         console.error('Error fetching images:', error);
       } finally {
-        setIsImagesLoading(false);
+        setIsGalleryImagesLoading(false);
       }
     };
 
-    fetchImages();
+    // Fetch individual images
+    fetchPrograms1Image();
+    fetchPrograms2Image();
+    fetchPrograms3Image();
+    fetchHome2Image();
+    fetchPrograms5Image();
+
+    // Fetch gallery images
+    fetchGalleryImages();
   }, []);
 
   // Dropdowns state
@@ -69,9 +191,23 @@ const Programs: React.FC = () => {
         </h2>
         {dropdowns.literacy && (
           <div className="dropdown-content">
+
             <div>
-              <img src="/images/trf-programs-1.jpg" alt="Hannah and a young boy are pointing to the book she is reading" className="programs-1" />
+              {isPrograms1ImageLoading ? (
+                <p>Loading image...</p>
+              ) : (
+                programs1Image ? (
+                  <img
+                    src={programs1Image.src}
+                    alt={programs1Image.alt}
+                    className="programs-1"
+                  />
+                ) : (
+                  <p>Image is unavailable</p>
+                )
+              )}
             </div>
+
             <label>Two Right Feet at Rockville Public Library</label>
             <p>Two Right Feet takes a multi-sensory approach to language and literacy. </p>
             <p>Each session features an age-appropriate book that is relevant to the selected educational theme. The 
@@ -126,9 +262,23 @@ const Programs: React.FC = () => {
           <div className="dropdown-content">
           <p>Two Right Feet Arts uses the K-4 State Arts Standards in music and dance as a curriculum guide.</p>
           <h3>Music - Instruments</h3>
+
           <div>
-            <img src="/images/trf-programs-2-istock.jpg" alt="smiling children stading shoulder to shoulder playing various instruments" className="programs-2-3-istock" />
+            {isPrograms2ImageLoading ? (
+              <p>Loading image...</p>
+            ) : (
+              programs2Image ? (
+                <img
+                  src={programs2Image.src}
+                  alt={programs2Image.alt}
+                  className="programs-2-3-istock"
+                />
+              ) : (
+                <p>Image is unavailable</p>
+              )
+            )}
           </div>
+
           <p>Auditory discrimination activities and games are used to identify the sounds of different percussion 
             instruments. Band games are another highlight; children learn to mimic short musical patterns, respond to cues 
             of conductor, and use active listening skills as they play in a band. With older groups, students take turns 
@@ -139,9 +289,23 @@ const Programs: React.FC = () => {
             certain songs and “jump-rope-rhymes” (sing from memory). Live music is a regular feature of Two Right Feet 
             Music, led by Garrett Demmerle, our bassist, musician, and lyricist.</p>
           <h3>Dance</h3>
+
           <div>
-            <img src="/images/trf-programs-3-istock.jpg" alt="five smiling children stretching in a fitness room preparing to dance" className="programs-2-3-istock" />
+            {isPrograms3ImageLoading ? (
+              <p>Loading image...</p>
+            ) : (
+              programs3Image ? (
+                <img
+                  src={programs3Image.src}
+                  alt={programs3Image.alt}
+                  className="programs-2-3-istock"
+                />
+              ) : (
+                <p>Image is unavailable</p>
+              )
+            )}
           </div>
+
           <p>Children demonstrate locomotor and non-locomotor movements for dance and creative movement activities. The 
             students are taught basic dance steps and are asked to contribute to the dance sequence (basic choreography). 
             Kids are given the opportunity to learn and demonstrate understanding of basic spatial concepts, accuracy in 
@@ -149,8 +313,6 @@ const Programs: React.FC = () => {
           </div>
         )}
       </div>
-
-
 
       <div className="dropdown">
         <h2 onClick={() => toggleDropdown('settings')} className="program-dropdown-header">
@@ -160,18 +322,46 @@ const Programs: React.FC = () => {
 
         {dropdowns.settings && (
           <div className="dropdown-content">
+
             <div>
-              <img src="/images/trf-home-2-programs-4.jpg" alt="Two Right Feet at Reggio Magnet School" className="home-2-programs-4" />
+              {isHome2ImageLoading ? (
+                <p>Loading image...</p>
+              ) : (
+                home2Image ? (
+                  <img
+                    src={home2Image.src}
+                    alt={home2Image.alt}
+                    className="home-2-programs-4"
+                  />
+                ) : (
+                  <p>Image is unavailable</p>
+                )
+              )}
             </div>
+
             <h3>Public and Private Schools: Grades PK - 3rd</h3>
             <li>Public Schools across CT and MA</li>
             <li>Montessori Method Schools</li>
             <li>Magnet, including many of Hartford’s Schools and CREC Schools</li>
             <li>Reggio Method Schools</li>
             <li>PTOs</li>
+
             <div>
-              <img src="/images/trf-programs-5.jpg" alt="Two Right Feet at Rockville Public Library" className="programs-5" />
+              {isPrograms5ImageLoading ? (
+                <p>Loading image...</p>
+              ) : (
+                programs5Image ? (
+                  <img
+                    src={programs5Image.src}
+                    alt={programs5Image.alt}
+                    className="programs-5"
+                  />
+                ) : (
+                  <p>Image is unavailable</p>
+                )
+              )}
             </div>
+
             <label>Two Right Feet at Rockville Public Library</label>
             <h3>After School Programs</h3>
             <li>Public and Private Schools (See above)</li>
@@ -204,11 +394,11 @@ const Programs: React.FC = () => {
       </div>
 
       <div>
-        {isImagesLoading ? (
+        {isGalleryImagesLoading ? (
           <p>Loading images...</p> // Display a loading message while images are being fetched
         ) : (
-          images.length > 0 ? (
-            images.map((image, index) => (
+          galleryImages.length > 0 ? (
+            galleryImages.map((image, index) => (
               <img  
                 key={index}
                 src={image.src}
@@ -217,7 +407,7 @@ const Programs: React.FC = () => {
               />
             ))
           ) : (
-            <p>No images available.</p> // Fallback message if images could not be fetched
+            <p>Gallery images not available.</p> // Fallback message if images could not be fetched
           )
         )}
       </div>
