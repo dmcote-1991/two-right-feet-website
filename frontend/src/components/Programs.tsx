@@ -1,8 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '/src/styles.css'; 
 
 const Programs: React.FC = () => {
+  const imageFileIds = [
+    { id: '673c0432428be6c6877e84be', alt: 'Hannah performing a read-along with Garrett playing bass in the background' },
+    { id: '673c053e428be6c6877e84f7', alt: 'Hannah teaching sign language during circle-time' },
+    { id: '673c0545428be6c6877e84fb', alt: 'Hannah showing a class of children print-outs of instruments' },
+    { id: '673c0454428be6c6877e84c6', alt: 'Hannah performing a read-along with Garrett playing bass behind her' },
+    { id: '673c054d428be6c6877e84ff', alt: 'Garrett leading a call-and-response steady beat exercise' },
+  ];
+
+  const [images, setImages] = useState<{ src: string; alt: string }[]>([]);
+
+  // Images loading state
+  const [isImagesLoading, setIsImagesLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const fetchedImages = await Promise.all(
+          imageFileIds.map(async ({ id, alt }) => {
+            const response = await fetch(`http://localhost:5000/api/images/image/${id}`);
+            if (response.ok) {
+              const blob = await response.blob();
+              const objectURL = URL.createObjectURL(blob);
+              return { src: objectURL, alt };
+            } else {
+              console.error(`Failed to fetch image with ID: ${id}`);
+              return null;
+            }
+          })
+        );
+        setImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      } finally {
+        setIsImagesLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  // Dropdowns state
   const [dropdowns, setDropdowns] = useState({
     literacy: false,
     readiness: false,
@@ -161,13 +202,26 @@ const Programs: React.FC = () => {
           <Link to="/program-list">Click Here</Link> to explore in detail.
         </p>
       </div>
+
       <div>
-        <img src="/images/trf-about-2-programs-6.jpg" alt="Hannah performing a read-along with Garrett playing bass in the background" className="about-programs-photo-gallery" />
-        <img src="/images/trf-programs-7.jpg" alt="Hannah teaching sign language during circle-time" className="about-programs-photo-gallery" />
-        <img src="/images/trf-programs-8.jpg" alt="Hannah showing a class of children print-outs of instruments" className="about-programs-photo-gallery" />
-        <img src="/images/trf-about-4-programs-9.jpg" alt="Hannah performing a read-along with Garrett playing bass behind her" className="about-programs-photo-gallery" />
-        <img src="/images/trf-programs-10.jpg" alt="Garrett leading a call-and-response steady beat exercise" className="about-programs-photo-gallery" />
+        {isImagesLoading ? (
+          <p>Loading images...</p> // Display a loading message while images are being fetched
+        ) : (
+          images.length > 0 ? (
+            images.map((image, index) => (
+              <img  
+                key={index}
+                src={image.src}
+                alt={image.alt}
+                className="about-programs-photo-gallery"
+              />
+            ))
+          ) : (
+            <p>No images available.</p> // Fallback message if images could not be fetched
+          )
+        )}
       </div>
+
     </section>
   );
 };
