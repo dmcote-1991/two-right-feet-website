@@ -1,37 +1,22 @@
 import { useState, useEffect } from 'react';
+import useImageFetch from '../hooks/useImageFetch';
 
 const ContactForm: React.FC = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-    const [contactImage, setContactImage] = useState<string | null>(null);
 
-    // Loading state
-    const [isContactImageLoading, setIsContactImageLoading] = useState(true);
+    const contactImageFileId = { 
+        id: '673c04de428be6c6877e84d3', 
+        alt: 'Two Right Feet at Bristol Public Library' 
+    };
 
-    useEffect(() => {
-        const fetchContactImage = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/api/images/image/673c04de428be6c6877e84d3');
-                if (response.ok) {
-                    const blob = await response.blob();
-                    const objectURL = URL.createObjectURL(blob);
-                    setContactImage(objectURL);
-                } else {
-                    console.error('Failed to fetch the contact image');
-                    setContactImage('/images/trf-home-1.png');
-                }
-            } catch (error) {
-                console.error('Error fetching contact image:', error);
-                setContactImage('/images/trf-home-1.png');
-            } finally {
-                setIsContactImageLoading(false);
-            }
-        };
-
-        fetchContactImage();
-    }, []);
+    // Use custom hook for the main image
+    const { image: contactImage, isLoading: isContactImageLoading } = useImageFetch(contactImageFileId.id, {
+        fallbackSrc: '/images/trf-home-1.png',
+        alt: contactImageFileId.alt,
+    });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,16 +34,14 @@ const ContactForm: React.FC = () => {
             <div>
                 {isContactImageLoading ? (
                     <p>Loading contact image...</p> // Show loading message while fetching
+                ) : contactImage ? (
+                    <img 
+                        src={contactImage.src} 
+                        alt={contactImage.alt}
+                        className="contact-1" 
+                    />
                 ) : (
-                    contactImage ? (
-                        <img 
-                            src={contactImage} 
-                            alt="Two Right Feet at Bristol Public Library" 
-                            className="contact-1" 
-                        />
-                    ) : (
-                        <p>Contact image is unavailable.</p> // Fallback message
-                    )
+                    <p>Contact image is unavailable.</p> // Fallback message
                 )}
             </div>
 
