@@ -1,88 +1,38 @@
 import { useState, useEffect } from 'react';
+import { fetchMultipleImages } from '../utils/fetchImages';
 import '/src/styles.css';
 
 const Home: React.FC = () => {
   const [isTestimonialsOpen, setIsTestimonialsOpen] = useState(false);
 
-  // State for the banner image
-  const [bannerImage, setBannerImage] = useState<{ src: string; alt: string; className: string } | null>(null);
-  const [isBannerImageLoading, setIsBannerImageLoading] = useState(true);
+  const [images, setImages] = useState<{ [key: string]: { src: string; alt: string } | null }>({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  // State for the Reggio image
-  const [reggioImage, setReggioImage] = useState<{ src: string; alt: string; className: string } | null>(null);
-  const [isReggioImageLoading, setIsReggioImageLoading] = useState(true);
+  useEffect(() => {
+    const fetchImages = async () => {
+      setIsLoading(true);
+      const imageFiles = [
+        { id: '673c04fe428be6c6877e84db', alt: 'Two Right Feet banner' },
+        { id: '673c0511428be6c6877e84df', alt: 'Two Right Feet at Reggio Magnet School' },
+      ];
+
+      const fetchedImages = await fetchMultipleImages(imageFiles);
+
+      setImages({
+        bannerImage: fetchedImages[0] || { src: '/images/trf-home-1.png', alt: 'Fallback Banner Image' },
+        reggioImage: fetchedImages[1] || { src: '/images/trf-home-1.png', alt: 'Fallback Reggio Image' },
+      });
+
+      setIsLoading(false);
+    };
+
+    fetchImages();
+  }, []);
 
   // State for testimonial drop-down
   const toggleTestimonials = () => {
     setIsTestimonialsOpen(!isTestimonialsOpen);
   };
-
-  useEffect(() => {
-    const fetchBannerImage = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/images/image/673c04fe428be6c6877e84db');
-          if (response.ok) {
-            const blob = await response.blob();
-            const objectURL = URL.createObjectURL(blob);
-            setBannerImage({
-              src: objectURL,
-              alt: 'Two Right Feet banner',
-              className: 'home-1'
-            });
-          } else {
-            console.error(`Failed to fetch banner image`);
-            setBannerImage({
-              src: '/images/trf-home-1.png',
-              alt: 'Fallback banner image',
-              className: 'home-1'
-            });
-          }
-        } catch (error) {
-          console.error('Error fetching banner image:', error);
-          setBannerImage({
-            src: '/images/trf-home-1.png',
-            alt: 'Fallback banner image',
-            className: 'home-1'
-          });
-        } finally {
-          setIsBannerImageLoading(false);
-        }
-    };
-
-    const fetchReggioImage = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/images/image/673c0511428be6c6877e84df');
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setReggioImage({
-            src: objectURL,
-            alt: 'Two Right Feet at Reggio Magnet School',
-            className: 'home-2-programs-4',
-          });
-        } else {
-          console.error('Failed to fetch reggio image');
-          setReggioImage({
-            src: '/images/trf-home-1.png',
-            alt: 'Fallback image',
-            className: 'home-1',
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching Reggio image:', error);
-        setReggioImage({
-          src: '/images/trf-home-1.png',
-          alt: 'Fallback image',
-          className: 'home-1',
-        });
-      } finally {
-        setIsReggioImageLoading(false);
-      }
-    };
-
-    fetchBannerImage();
-    fetchReggioImage();
-  }, []);
 
   return (
     <section className="home">
@@ -90,16 +40,12 @@ const Home: React.FC = () => {
       <h3>Enrichment Programs for Reading Readiness. Literacy. and Language Development</h3>
 
       <div>
-        {isBannerImageLoading ? (
-          <p>Loading banner image...</p> // Show loading message while fetching
-        ) : bannerImage ? (
-          <img 
-            src={bannerImage.src}
-            alt={bannerImage.alt}
-            className={bannerImage.className}
-          />
+        {isLoading ? (
+          <p>Loading banner image...</p>
+        ) : images.bannerImage ? (
+          <img src={images.bannerImage.src} alt={images.bannerImage.alt} className="home-1" />
         ) : (
-          <p>Banner image is unavailable.</p> // Fallback message
+          <p>Banner image is unavailable.</p>
         )}
       </div>
 
@@ -122,16 +68,12 @@ const Home: React.FC = () => {
       </p>
 
       <div>
-        {isReggioImageLoading ? (
+        {isLoading ? (
           <p>Loading image...</p>
-        ) : reggioImage ? (
-          <img
-            src={reggioImage.src}
-            alt={reggioImage.alt}
-            className={reggioImage.className}
-          />
+        ) : images.reggioImage ? (
+          <img src={images.reggioImage.src} alt={images.reggioImage.alt} className="home-2-programs-4" />
         ) : (
-          <p>Reggio image is unavailable.</p>
+          <p>Image is unavailable.</p>
         )}
       </div>
 

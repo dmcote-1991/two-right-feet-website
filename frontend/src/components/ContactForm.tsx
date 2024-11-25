@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useImageFetch from '../hooks/useImageFetch';
 
 const ContactForm: React.FC = () => {
