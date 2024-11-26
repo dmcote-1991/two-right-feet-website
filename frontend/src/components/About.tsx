@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import useImageFetch from '../hooks/useImageFetch';
-import { fetchMultipleImages } from '../utils/fetchImages';
+import { fetchMultipleImages, fetchSingleImage } from '../utils/fetchImages';
 import '/src/styles.css';
 
 const About: React.FC = () => {
@@ -19,12 +18,26 @@ const About: React.FC = () => {
 
   const [galleryImages, setGalleryImages] = useState<{ src: string; alt: string }[]>([]);
   const [isGalleryImagesLoading, setIsGalleryImagesLoading] = useState(true);
+  const [mainAboutImage, setMainAboutImage] = useState<{ src: string; alt: string }>({ src: '', alt: '' });
+  const [isMainImageLoading, setIsMainImageLoading] = useState(true);
 
-  // Use custom hook for the main image
-  const { image: mainAboutImage, isLoading: isMainImageLoading } = useImageFetch(mainAboutImageFileId.id, {
-    fallbackSrc: '/images/trf-home-1.png',
-    alt: mainAboutImageFileId.alt,
-  });
+  // Fetch the main image using fetchSingleImage utility
+  useEffect(() => {
+    const fetchMainImage = async () => {
+      setIsMainImageLoading(true);
+      try {
+        const image = await fetchSingleImage(mainAboutImageFileId.id, mainAboutImageFileId.alt, '/images/trf-home-1.png');
+        setMainAboutImage(image);
+      } catch (error) {
+        console.error('Error fetching main image:', error);
+        setMainAboutImage({ src: '/images/trf-home-1.png', alt: mainAboutImageFileId.alt }); // Fallback image on error
+      } finally {
+        setIsMainImageLoading(false);
+      }
+    };
+
+    fetchMainImage();
+  }, []);
   
   // Fetch gallery images using fetchMultipleImages utility
   useEffect(() => {
@@ -79,7 +92,7 @@ const About: React.FC = () => {
       
       <div>
         {isMainImageLoading ? (
-          <p>Loading main image...</p>
+          <p>Loading image...</p>
         ) : mainAboutImage ? (
           <img 
             src={mainAboutImage.src} 
@@ -87,7 +100,7 @@ const About: React.FC = () => {
             className="about-6" 
           />
         ) : (
-          <p>Main image is unavailable.</p>
+          <p>Image is unavailable.</p>
         )}
       </div>
 
