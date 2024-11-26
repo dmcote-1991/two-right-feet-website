@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import useImageFetch from '../hooks/useImageFetch';
+import { useState, useEffect } from 'react';
+import { fetchSingleImage } from '../utils/fetchImages';
+import '/src/styles.css';
 
 const ContactForm: React.FC = () => {
     const [name, setName] = useState('');
@@ -12,16 +13,32 @@ const ContactForm: React.FC = () => {
         alt: 'Two Right Feet at Bristol Public Library' 
     };
 
-    // Use custom hook for the main image
-    const { image: contactImage, isLoading: isContactImageLoading } = useImageFetch(contactImageFileId.id, {
-        fallbackSrc: '/images/trf-home-1.png',
-        alt: contactImageFileId.alt,
-    });
+    const [contactImage, setContactImage] = useState<{ src: string; alt: string }>({ src: '', alt: '' });
+    const [isContactImageLoading, setIsContactImageLoading] = useState(true);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        alert(`Your message has been successfully sent to our team. We will review your message and respond as soon as possible. Thank you!`);
-    };
+    // Fetch the contact image using fetchSingleImage utility
+    useEffect(() => {
+        const fetchContactImage = async () => {
+            setIsContactImageLoading(true);
+            try {
+                const image = await fetchSingleImage(contactImageFileId.id, contactImageFileId.alt, '/images/trf-home-1.png');
+                setContactImage(image);
+            } catch (error) {
+                console.error('Error fetching contact image:', error);
+                setContactImage({ src: '/images/trf-home-1.png', alt: contactImageFileId.alt }); // Fallback image on error
+            } finally {
+                setIsContactImageLoading(false);
+            }
+        };
+
+        fetchContactImage();
+    }, []);
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        console.log('Form submitted with values:', { name, email, subject, message });
+        // Add logic to process the form submission here
+    }
 
     return (
         <section id="contact">
@@ -33,7 +50,7 @@ const ContactForm: React.FC = () => {
 
             <div>
                 {isContactImageLoading ? (
-                    <p>Loading contact image...</p> // Show loading message while fetching
+                    <p>Loading image...</p> // Show loading message while fetching
                 ) : contactImage ? (
                     <img 
                         src={contactImage.src} 
@@ -41,7 +58,7 @@ const ContactForm: React.FC = () => {
                         className="contact-1" 
                     />
                 ) : (
-                    <p>Contact image is unavailable.</p> // Fallback message
+                    <p>Image is unavailable.</p> // Fallback message
                 )}
             </div>
 
