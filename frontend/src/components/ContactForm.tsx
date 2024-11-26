@@ -37,6 +37,7 @@ const ContactForm: React.FC = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log('Form submitted with values:', { name, email, subject, message });
+        alert(`Your message has been successfully sent to our team. We will review your message and respond as soon as possible. Thank you!`);
         // Add logic to process the form submission here
     }
 
