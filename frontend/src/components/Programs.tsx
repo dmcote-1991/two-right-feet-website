@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchSingleImage, fetchMultipleImages } from '../utils/fetchImages';
 import '/src/styles.css'; 
 
 const Programs: React.FC = () => {
-  // Individual images
-  const programs1ImageFileId = { id: '673c0520428be6c6877e84e3', alt: 'Hannah and a young boy are pointing to the book she is reading' };
-  const programs2ImageFileId = { id: '673c0527428be6c6877e84e7', alt: 'smiling children stading shoulder to shoulder playing various instruments' };
-  const programs3ImageFileId = { id: '673c052e428be6c6877e84ed', alt: 'five smiling children stretching in a fitness room preparing to dance' };
-  const home2ImageFileId = { id: '673c0511428be6c6877e84df', alt: 'Two Right Feet at Reggio Magnet School' };
-  const programs5ImageFileId = { id: '673c0536428be6c6877e84f3', alt: 'Two Right Feet at Rockville Public Library' };
+  // Individual image IDs and altsj
+  const individualImageFileIds = [
+    { id: '673c0520428be6c6877e84e3', alt: 'Hannah and a young boy are pointing to the book she is reading' },
+    { id: '673c0527428be6c6877e84e7', alt: 'smiling children stading shoulder to shoulder playing various instruments' },
+    { id: '673c052e428be6c6877e84ed', alt: 'five smiling children stretching in a fitness room preparing to dance' },
+    { id: '673c0511428be6c6877e84df', alt: 'Two Right Feet at Reggio Magnet School' },
+    { id: '673c0536428be6c6877e84f3', alt: 'Two Right Feet at Rockville Public Library' },
+  ];
 
-  // Gallery images
+  // Gallery image IDs and alts
   const galleryImageFileIds = [
     { id: '673c0432428be6c6877e84be', alt: 'Hannah performing a read-along with Garrett playing bass in the background' },
     { id: '673c053e428be6c6877e84f7', alt: 'Hannah teaching sign language during circle-time' },
@@ -19,151 +22,43 @@ const Programs: React.FC = () => {
     { id: '673c054d428be6c6877e84ff', alt: 'Garrett leading a call-and-response steady beat exercise' },
   ];
   
-  // Individual images state
+  // Fetch individual images using useImageFetch
   const [programs1Image, setPrograms1Image] = useState<{ src: string; alt: string } | null>(null);
   const [programs2Image, setPrograms2Image] = useState<{ src: string; alt: string } | null>(null);
   const [programs3Image, setPrograms3Image] = useState<{ src: string; alt: string } | null>(null);
   const [home2Image, setHome2Image] = useState<{ src: string; alt: string } | null>(null);
   const [programs5Image, setPrograms5Image] = useState<{ src: string; alt: string } | null>(null);
   
+  useEffect(() => {
+    const fetchImages = async () => {
+      setPrograms1Image(await fetchSingleImage(individualImageFileIds[0].id, individualImageFileIds[0].alt, ''));
+      setPrograms2Image(await fetchSingleImage(individualImageFileIds[1].id, individualImageFileIds[1].alt, ''));
+      setPrograms3Image(await fetchSingleImage(individualImageFileIds[2].id, individualImageFileIds[2].alt, ''));
+      setHome2Image(await fetchSingleImage(individualImageFileIds[3].id, individualImageFileIds[3].alt, ''));
+      setPrograms5Image(await fetchSingleImage(individualImageFileIds[4].id, individualImageFileIds[4].alt, ''));
+    };
+
+    fetchImages();
+  }, []);
+
   // Gallery images state
   const [galleryImages, setGalleryImages] = useState<{ src: string; alt: string }[]>([]);
-  
-  // Individual images loading states
-  const [isPrograms1ImageLoading, setIsPrograms1ImageLoading] = useState(true);
-  const [isPrograms2ImageLoading, setIsPrograms2ImageLoading] = useState(true);
-  const [isPrograms3ImageLoading, setIsPrograms3ImageLoading] = useState(true);
-  const [isHome2ImageLoading, setIsHome2ImageLoading] = useState(true);
-  const [isPrograms5ImageLoading, setIsPrograms5ImageLoading] = useState(true);
-
-  // Gallery images loading states
   const [isGalleryImagesLoading, setIsGalleryImagesLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch programs-1 image
-    const fetchPrograms1Image = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${programs1ImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setPrograms1Image({ src: objectURL, alt: programs1ImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch programs-1 image`);
-        }
-      } catch (error) {
-        console.error('Error fetching programs-1 image:', error);
-      } finally {
-        setIsPrograms1ImageLoading(false);
-      }
-    };
-
-    // Fetch programs-2 image
-    const fetchPrograms2Image = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${programs2ImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setPrograms2Image({ src: objectURL, alt: programs2ImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch programs-2 image`);
-        }
-      } catch (error) {
-        console.error('Error fetching programs-2 image:', error);
-      } finally {
-        setIsPrograms2ImageLoading(false);
-      }
-    };
-
-    // Fetch programs-3 image
-    const fetchPrograms3Image = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${programs3ImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setPrograms3Image({ src: objectURL, alt: programs3ImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch programs-3 image`);
-        }
-      } catch (error) {
-        console.error('Error fetching programs-3 image:', error);
-      } finally {
-        setIsPrograms3ImageLoading(false);
-      }
-    };
-
-    // Fetch home-2 image
-    const fetchHome2Image = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${home2ImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setHome2Image({ src: objectURL, alt: home2ImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch home-2 image`);
-        }
-      } catch (error) {
-        console.error('Error fetching home-2 image:', error);
-      } finally {
-        setIsHome2ImageLoading(false);
-      }
-    };
-
-    // Fetch programs-5 image
-    const fetchPrograms5Image = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/images/image/${programs5ImageFileId.id}`);
-        if (response.ok) {
-          const blob = await response.blob();
-          const objectURL = URL.createObjectURL(blob);
-          setPrograms5Image({ src: objectURL, alt: programs5ImageFileId.alt });
-        } else {
-          console.error(`Failed to fetch programs-5 image`);
-        }
-      } catch (error) {
-        console.error('Error fetching programs-5 image:', error);
-      } finally {
-        setIsPrograms5ImageLoading(false);
-      }
-    };
-
-    // Fetch gallery images
     const fetchGalleryImages = async () => {
       try {
-        const fetchedImages = await Promise.all(
-          galleryImageFileIds.map(async ({ id, alt }) => {
-            const response = await fetch(`http://localhost:5000/api/images/image/${id}`);
-            if (response.ok) {
-              const blob = await response.blob();
-              const objectURL = URL.createObjectURL(blob);
-              return { src: objectURL, alt };
-            } else {
-              console.error(`Failed to fetch image with ID: ${id}`);
-              return null;
-            }
-          })
-        );
-        setGalleryImages(fetchedImages.filter((img): img is { src: string; alt: string } => img !== null));
+        const images = await fetchMultipleImages(galleryImageFileIds);
+        setGalleryImages(images);
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error('Error fetching gallery images:', error);
       } finally {
         setIsGalleryImagesLoading(false);
       }
     };
-
-    // Fetch individual images
-    fetchPrograms1Image();
-    fetchPrograms2Image();
-    fetchPrograms3Image();
-    fetchHome2Image();
-    fetchPrograms5Image();
-
-    // Fetch gallery images
     fetchGalleryImages();
   }, []);
+  
 
   // Dropdowns state
   const [dropdowns, setDropdowns] = useState({
@@ -193,18 +88,10 @@ const Programs: React.FC = () => {
           <div className="dropdown-content">
 
             <div>
-              {isPrograms1ImageLoading ? (
-                <p>Loading image...</p>
+              {programs1Image ? (
+                <img src={programs1Image.src} alt={programs1Image.alt} className="programs-1" />
               ) : (
-                programs1Image ? (
-                  <img
-                    src={programs1Image.src}
-                    alt={programs1Image.alt}
-                    className="programs-1"
-                  />
-                ) : (
-                  <p>Image is unavailable</p>
-                )
+                <p>Loading image...</p>
               )}
             </div>
 
@@ -264,20 +151,12 @@ const Programs: React.FC = () => {
           <h3>Music - Instruments</h3>
 
           <div>
-            {isPrograms2ImageLoading ? (
-              <p>Loading image...</p>
-            ) : (
-              programs2Image ? (
-                <img
-                  src={programs2Image.src}
-                  alt={programs2Image.alt}
-                  className="programs-2-3-istock"
-                />
+              {programs2Image ? (
+                <img src={programs2Image.src} alt={programs2Image.alt} className="programs-2-3-istock" />
               ) : (
-                <p>Image is unavailable</p>
-              )
-            )}
-          </div>
+                <p>Loading image...</p>
+              )}
+            </div>
 
           <p>Auditory discrimination activities and games are used to identify the sounds of different percussion 
             instruments. Band games are another highlight; children learn to mimic short musical patterns, respond to cues 
@@ -291,20 +170,12 @@ const Programs: React.FC = () => {
           <h3>Dance</h3>
 
           <div>
-            {isPrograms3ImageLoading ? (
-              <p>Loading image...</p>
-            ) : (
-              programs3Image ? (
-                <img
-                  src={programs3Image.src}
-                  alt={programs3Image.alt}
-                  className="programs-2-3-istock"
-                />
+              {programs3Image ? (
+                <img src={programs3Image.src} alt={programs3Image.alt} className="programs-2-3-istock" />
               ) : (
-                <p>Image is unavailable</p>
-              )
-            )}
-          </div>
+                <p>Loading image...</p>
+              )}
+            </div>
 
           <p>Children demonstrate locomotor and non-locomotor movements for dance and creative movement activities. The 
             students are taught basic dance steps and are asked to contribute to the dance sequence (basic choreography). 
@@ -324,18 +195,10 @@ const Programs: React.FC = () => {
           <div className="dropdown-content">
 
             <div>
-              {isHome2ImageLoading ? (
-                <p>Loading image...</p>
+              {home2Image ? (
+                <img src={home2Image.src} alt={home2Image.alt} className="home-2" />
               ) : (
-                home2Image ? (
-                  <img
-                    src={home2Image.src}
-                    alt={home2Image.alt}
-                    className="home-2-programs-4"
-                  />
-                ) : (
-                  <p>Image is unavailable</p>
-                )
+                <p>Loading image...</p>
               )}
             </div>
 
@@ -347,18 +210,10 @@ const Programs: React.FC = () => {
             <li>PTOs</li>
 
             <div>
-              {isPrograms5ImageLoading ? (
-                <p>Loading image...</p>
+              {programs5Image ? (
+                <img src={programs5Image.src} alt={programs5Image.alt} className="programs-5" />
               ) : (
-                programs5Image ? (
-                  <img
-                    src={programs5Image.src}
-                    alt={programs5Image.alt}
-                    className="programs-5"
-                  />
-                ) : (
-                  <p>Image is unavailable</p>
-                )
+                <p>Loading image...</p>
               )}
             </div>
 
@@ -395,20 +250,9 @@ const Programs: React.FC = () => {
 
       <div>
         {isGalleryImagesLoading ? (
-          <p>Loading images...</p> // Display a loading message while images are being fetched
+          <p>Loading images...</p>
         ) : (
-          galleryImages.length > 0 ? (
-            galleryImages.map((image, index) => (
-              <img  
-                key={index}
-                src={image.src}
-                alt={image.alt}
-                className="about-programs-photo-gallery"
-              />
-            ))
-          ) : (
-            <p>Gallery images not available.</p> // Fallback message if images could not be fetched
-          )
+          galleryImages.map((image, index) => <img key={index} src={image.src} alt={image.alt} className="about-programs-photo-gallery" />)
         )}
       </div>
 
