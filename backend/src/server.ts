@@ -19,10 +19,11 @@ const mongoURI = process.env.MONGO_URI as string;
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Allow CORS for requests from the frontend on port 5173
+// Middleware
 app.use(cors({
   origin: 'http://localhost:5173',
 }));
+app.use(express.json()); // Ensure JSON parsing
 
 app.use('/api/programs', programRouter);
 app.use('/api/images', imageRouter);
