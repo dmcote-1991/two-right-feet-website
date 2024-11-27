@@ -8,6 +8,7 @@ import { GridFSBucket } from 'mongodb';
 import http from 'http'; // For increasing server timeout
 import programRouter from './routes/program.js';
 import imageRouter from './routes/image.js';
+import articleRouter from './routes/article.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,7 @@ app.use(cors({
 
 app.use('/api/programs', programRouter);
 app.use('/api/images', imageRouter);
+app.use('/api/articles', articleRouter);
 
 // MongoDB connection and GrisFS setup
 mongoose.connect(mongoURI)
