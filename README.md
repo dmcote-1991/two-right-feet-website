@@ -26,12 +26,15 @@ two-right-feet-website/
 │   │   └── ...                
 │   ├── src/                   # Source code
 │   │   ├── server.ts          # Entry point
+│   │   ├── global.d.ts
 │   │   ├── config/
 │   │   ├── controllers/
 │   │   ├── models/
+│   │   │   ├── Article.ts
 │   │   │   ├── Image.ts
 │   │   │   └── Program.ts
 │   │   └── routes/
+│   │       ├── article.ts
 │   │       ├── image.ts
 │   │       └── program.ts
 │   ├── .env
@@ -45,9 +48,13 @@ two-right-feet-website/
 │   │   └── ...
 │   ├── public/                # Static files
 │   │   └── images/
-│   │       └── ...
+│   │       ├── trf-header-footer-1.png  #TRF insignia static image
+│   │       └── trf-home-1.png           #TRF banner static image
 │   ├── src/                   # Source code
 │   │   ├── components/
+│   │   │    └── ...
+│   │   ├── utils/             # Utility functions
+│   │   │    └── fetchImages.ts 
 │   │   ├── App.tsx            # Main application component
 │   │   ├── index.tsx          # Entry point
 │   │   └── styles.css
