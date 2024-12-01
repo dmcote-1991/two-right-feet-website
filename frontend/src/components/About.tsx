@@ -60,7 +60,7 @@ const About: React.FC = () => {
     <section className="about">
       <h2>About Us</h2>
       
-      <div>
+      <div className="gallery-container">
         {isGalleryImagesLoading ? (
           <p>Loading images...</p> // Display a loading message while images are being fetched
         ) : (

@@ -3,11 +3,57 @@ import { fetchMultipleImages } from '../utils/fetchImages';
 import '/src/styles.css';
 
 const Home: React.FC = () => {
-  const [isTestimonialsOpen, setIsTestimonialsOpen] = useState(false);
-
-  const [images, setImages] = useState<{ [key: string]: { src: string; alt: string } | null }>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [images, setImages] = useState<{ [key: string]: { src: string; alt: string } | null }>({});
+  const [activeIndex, setActiveIndex] = useState(0);
 
+  const testimonials = [
+    {
+      quote: '"Interactive, Engaging Programs"',
+      text: `“As a librarian, I highly recommend the high-quality programming of Two Right Feet. But I can also endorse them as a parent—my two young children are big fans of their interactive, engaging programs. Children love the storytime elements: the stories, the songs, the sign language, and the literacy games that Hannah and Garry incorporate into each session. And the electric bass adds an element of “cool” that we can’t match in our regular library storytimes! We include Two Right Feet as a regular part of our lineup, and will continue to do so.”`,
+      author: "– Sarah Kline Morgan",
+      position: "Director, Branch & Children’s Services, Farmington Libraries"
+    },
+    {
+      quote: '"This Dynamic Duo is a Real Delight"',
+      text: `“Two Right Feet came to our school, the arts academy, and brought literacy alive, through music and games, to our pre-kindergarten and kindergarten students. The students looked forward to this program and were captivated by it each time. Each session focused on a theme and revolved around a story. The team used the other activities to reinforce the concepts that they introduced to the students through the story. A favorite session of mine was when they did one all about verbs. Amazing! This dynamic duo is a real delight.”`,
+      author: "– Sarah Stevenson",
+      position: "Before and Aftercare Coordinator, CREC Museum Academy"
+    },
+    {
+      quote: '"We Definitely Recommend Two Right Feet"',
+      text: `“Their music and movement programs offer a rich blend of early literacy activities…In tune with the developmental stages of young children, Garry and Hannah, present engaging, interactive, theme-based sessions incorporating stories, sign-language, singing and movement… Their playful celebration of singing, dancing, moving, talking, signing, and reading is joy-filled. We admire the spirit of Garry and Hannah who are sensitive and caring adults. They are reliable, punctual and professional. We definitely recommend Two Right Feet.”`,
+      author: "– Prosser Public Library (Children’s Department)"
+    },
+    {
+      quote: '“One of Our Most Well-Attended Programs”',
+      text: `“Two Right Feet is one of our most well-attended programs and the children just love it. The combination of the bass and singing captivates the children and even their parents get involved! Music teaches children so many things and 2RF has the experience and knowledge to bring it to life. I highly recommend 2RF to other programs looking for an enriching, quality music and movement experience for young children.”`,
+      author: "– Amy Morales",
+      position: "Director, Enfield Family Resource Center"
+    }
+  ];
+
+  const handlePrevTestimonial = () => {
+    setActiveIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextTestimonial = () => {
+    setActiveIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const handleDotClick = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  // Change testimonial at regular interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
+    }, 40000); // 40 seconds interval
+    return () => clearInterval(interval); // Clean up on unmount
+  }, []);
+
+  // Fetch images
   useEffect(() => {
     const fetchImages = async () => {
       setIsLoading(true);
@@ -28,11 +74,6 @@ const Home: React.FC = () => {
 
     fetchImages();
   }, []);
-
-  // State for testimonial drop-down
-  const toggleTestimonials = () => {
-    setIsTestimonialsOpen(!isTestimonialsOpen);
-  };
 
   return (
     <section className="home">
@@ -78,69 +119,53 @@ const Home: React.FC = () => {
       </div>
 
       <label>Two Right Feet at CREC Reggio Magnet School of the Arts</label>
-      <h2 className="testimonials-header" onClick={toggleTestimonials} style={{ cursor: 'pointer' }}>
-        Testimonials {isTestimonialsOpen ? '▲' : '▼'} {/* Indicator for dropdown */}
+
+      <h2 className="testimonials-header">
+        Testimonials
       </h2>
-      {isTestimonialsOpen && (
-        <div className="testimonials-dropdown">
-          <p>
-            <b>"Interactive, Engaging Programs"</b> <br />
-            <br />
-            “As a librarian, I highly recommend the high-quality programming of Two Right Feet. 
-            But I can also endorse them as a parent—my two young children are big fans of their 
-            interactive, engaging programs. Children love the storytime elements: the stories, the 
-            songs, the sign language, and the literacy games that Hannah and Garry incorporate 
-            into each session. And the electric bass adds an element of “cool” that we can’t match 
-            in our regular library storytimes! We include Two Right Feet as a regular part of our 
-            lineup, and will continue to do so.”<br />
-            <br />
-              <b>– Sarah Kline Morgan</b> <br />
-                Director, Branch & Children’s Services <br />
-                Farmington Libraries
-          </p>
-          <p>
-            <b>"This Dynamic Duo is a Real Delight"</b> <br />
-            <br />
-            “Two Right Feet came to our school, the arts academy, and brought literacy alive, 
-            through music and games, to our pre- kindergarten and kindergarten students. The 
-            students looked forward to this program and were captivated by it each time. Each 
-            session focused on a theme and revolved around a story. The team used the other 
-            activities to reinforce the concepts that they introduced to the students through the 
-            story. A favorite session of mine was when they did one all about verbs. Amazing! This 
-            dynamic duo is a real delight.”<br />
-            <br />
-            <b>– Sarah Stevenson</b> <br />
-              Before and Aftercare Coordinator <br />
-              CREC Museum Academy
-           
-          </p>
-          <p>
-            <b>"We Definitley Recommend Two Right Feet"</b><br />
-            <br />
-            “Their music and movement programs offer a rich blend of early literacy activities…In 
-            tune with the developmental stages of young children, Garry and Hannah, present 
-            engaging, interactive, theme-based sessions incorporating stories, sign-launguage, 
-            singing and movement… Their playful celebration of singing, dancing, moving, talking, 
-            signing, and reading is joy-filled. We admire the spirit of Garry and Hannah who are 
-            sensitive and caring adults. They are reliable, punctual and professional. We 
-            definitely recommend Two Right Feet.”<br />
-            <br />
-            <b>– Prosser Public Library (Children’s Department)</b>
-          </p>
-          <p>
-            <b>“One of Our Most Well-Attended Programs”</b><br />
-            <br />
-            “Two Right Feet is one of our most well-attended programs and the children just love 
-            it. The combination of the bass and singing captivates the children and even their 
-            parents get involved! Music teaches children so many things and 2RF has the experience 
-            and knowledge to bring it to life. I highly recommend 2RF to other programs looking 
-            for an enriching, quality music and movement experience for young children.”<br />
-            <br />
-            <b>– Amy Morales</b><br />
-            Director, Enfield Family Resource Center
-          </p>
+
+      <div className="testimonials-carousel">
+        {testimonials.map((testimonial, index) => (
+          <div
+          key={index}
+          className={`testimonial-slide ${activeIndex === index ? 'active' : ''}`}
+          >
+            <p className="testimonial-quote">
+              <b>{testimonial.quote}</b>
+              <br />
+              <br />
+              {testimonial.text}
+              <br />
+              <br />
+              <b>{testimonial.author}</b>
+              <br />
+              <span>{testimonial.position}</span>
+            </p>
+          </div>
+        ))}
+
+        {/* Dot pagination */}
+
+        <div className="pagination-dots">
+          <button className="prev-button" onClick={handlePrevTestimonial}>
+            <span className="triangle-left"></span> {/* Left triangle */}
+          </button>
+
+          {testimonials.map((_, index) => (
+            <span
+              key={index}
+              className={`dot ${activeIndex === index ? 'active-dot' : ''}`}
+              onClick={() => handleDotClick(index)}
+            />
+          ))}
+          
+          <button className="next-button" onClick={handleNextTestimonial}>
+            <span className="triangle-right"></span> {/* Right triangle */}
+          </button>
         </div>
-      )}
+
+
+      </div>
     </section>
   );
 };
